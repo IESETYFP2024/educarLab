@@ -2,6 +2,8 @@
 
 git clone https://github.com/IESETYFP2024/educarLab
 
+para tener la base de datos que estamos utilizando importa el script bdeducar.sql que se encuentra en el repositorio
+
 cd backend --> npm install
 
 cd frontend --> npm install
@@ -21,7 +23,5 @@ tene mucho cuidado y consulta a los compañeros si modificas código ya existent
 para actualizar con el código fuente del repositorio:
 
 	git pull origin main
-
-para tener la base de datos que estamos utilizando importa el script .sql que se encuentra en el repositorio
 
 si no te da error el backend modifica el archivo "conexión.js" que esta dentro de "db" con tus configuraciones de base de datos
