@@ -23,20 +23,7 @@ async function GetHorarios() {
     return horarios;
 }
 
-export async function horarioDisponible(id, fechaVisita) {
-    try {
-        const [rows] = await db.execute(
-            "SELECT COUNT(*) AS count FROM escuelas WHERE horario = ? AND fecha = ?",
-            [id, fechaVisita]
-        );
 
-        const count = rows[0].count;
-        return count === 0; 
-    } catch (error) {
-        console.error('Error al chequear la disponibilidad del horario:', error);
-        throw new Error('Error al chequear la disponibilidad del horario');
-    }
-}
 
 export async function getHorariosOcupados(fechaVisita){
     try{

@@ -1,7 +1,7 @@
 // Importación de módulos necesarios
 import express from 'express';
 import cors from 'cors';
-import { Escuela, Horarios, PostTurno, horarioDisponible, getHorariosOcupados, getFechasOcupadas, getCue } from './apis/formEscuelas.js';
+import { Escuela, Horarios, PostTurno, getHorariosOcupados, getFechasOcupadas, getCue } from './apis/formEscuelas.js';
 import { PostTurnoComunidad, getComunidadData } from './apis/formComunidad.js';
 import {  PostTurnoDocente, getDocenteData } from './apis/formDocente.js';
 
@@ -56,18 +56,6 @@ app.post('/post/docente', (req, res) => {
     }
 })
 
-// Ruta para verificar disponibilidad de horario
-app.get('/horario/disponible', async (req, res) => {
-  const { id, fechaVisita } = req.query;
-
-  try {
-      const isAvailable = await horarioDisponible(id, fechaVisita);
-      res.json({ available: isAvailable });
-  } catch (error) {
-      console.error('Error al checkear los horarios habilitados:', error);
-      res.status(500).json({ error: "Error al checkear los horarios habilitados" });
-  }
-});
 
 // Ruta para obtener horarios ocupados
 app.get('/horarios/ocupados', async (req, res) => {

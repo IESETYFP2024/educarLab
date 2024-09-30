@@ -44,6 +44,7 @@ const EducacionForm = () => {
     };
 
     const normalizeString = (str) => {
+        console.log('Input to normalizeString:', str, typeof str);
         return str
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
             .replace(/[^a-z0-9\s]/g, '') // Remove special characters
@@ -187,12 +188,15 @@ const EducacionForm = () => {
                 onInputChange={handleCueInputChange}
                 onChange={handleCueSelect}
                 isOptionEqualToValue={(option, value) => option.id_cue === value.id_cue}
-                renderOption={(props, option) => (
-                    <li {...props}>
-                        <div>{option.id_cue} - {option.nombre_escuela}</div>
-                        <div style={{fontSize: '0.8em', color: 'gray'}}>{option.localidad}</div>
-                    </li>
-                )}
+                renderOption={(props, option) => {
+                    const { key, ...otherProps } = props;
+                    return (
+                        <li key={key} {...otherProps}>
+                            <div>{option.id_cue} - {option.nombre_escuela}</div>
+                            <div style={{fontSize: '0.8em', color: 'gray'}}>{option.localidad}</div>
+                        </li>
+                    );
+                }}
             />
             <TextField
                 label="Nombre de la Escuela"

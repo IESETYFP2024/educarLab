@@ -56,7 +56,7 @@ function App() {
     if (formActual === 'educacion' || formActual === 'taller Docente' || formActual === 'taller Comunidad') {
       setFormActual('');
     } else {
-      window.location.href = '../ConectarLab.html';  
+      window.location.href = '/frontend/public/ConectarLab.html';  
     }
     
   };
@@ -72,7 +72,7 @@ function App() {
            sx={{ width: '120px' }}
         ><HomeIcon />
         </Button>
-        <Card sx={{ width: '100%', maxWidth: 600}} className='form-card'> 
+        <Card sx={{ width: '100%', maxWidth: 600}} className='form-card' > 
           <CardContent>
             {/* Título del formulario */}
             <Typography variant="h5" component="div" gutterBottom style={{textAlign:"center"}} className='form-title'>
@@ -85,7 +85,7 @@ function App() {
               className='visit-button'
               onClick={handleEducacionClick}
               fullWidth
-              sx={{ mb: 2 }}
+              sx={{ mb: 2}}
             >
               Visitas Escuelas
             </Button>
@@ -124,12 +124,6 @@ function App() {
                 </Typography>
               ))}
             </Box>
-
-                   {/* Botón para volver al inicio */}
-       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-
-      </Box>
-
           </CardContent>
         </Card>
       </Box>

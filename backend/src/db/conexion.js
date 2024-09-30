@@ -7,7 +7,7 @@ try {
       host: 'localhost',
       user: 'root',
       password: 'lucas24',
-      database: 'ejemplo',
+      database: 'conectarlab',
     });
 } catch (err) {
     console.log(err);
