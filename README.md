@@ -20,6 +20,9 @@ para contribuir tu parte:
 
 tene mucho cuidado y consulta a los compañeros si modificas código ya existente, ya que todos van a tener que actualizar tu cambio/adición
 
+Si no te deja hacer el push origin es probablemente porque debes actualizar el codigo ya que se actualizo en el repositorio, por favor no utilices ningun codigo que fuerce el push como 'push -f origin main' ya que eso borraria los cambios en el repositorio
+
+utilizar el siguiente codigo para actualizar
 para actualizar con el código fuente del repositorio:
 
 	git pull origin main
