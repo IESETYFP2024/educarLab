@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Grid, Typography, IconButton, CardMedia } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 
 const DocenteForm = ({talleres}) => {
@@ -61,16 +60,11 @@ const DocenteForm = ({talleres}) => {
             component="h2" 
             gutterBottom
             sx={{
-              fontFamily: '"Playfair Display", serif',
-              fontWeight: 600,
-              color: '#1a237e',
-              borderBottom: '2px solid #1a237e',
+              fontWeight: 'bold',
               paddingBottom: '8px',
               marginBottom: '16px',
-              display: 'inline-block',
               textTransform: 'capitalize',
               letterSpacing: '0.5px',
-              textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               fontSize: '1.5rem', 
             }}
           >
@@ -170,7 +164,6 @@ const DocenteForm = ({talleres}) => {
           color="primary" 
           type="submit" 
           sx={{ minWidth: '120px' }}
-          endIcon={<SendIcon />}
         >
           Enviar
         </Button>

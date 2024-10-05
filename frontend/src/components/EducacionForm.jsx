@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Autocomplete} from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Autocomplete, Grid} from '@mui/material';
 import Calendario from './Calendario';
 import Horario from './Horario';
 import PdfDownloadComponent from './Pdf';
@@ -18,7 +17,8 @@ const EducacionForm = () => {
         telefono: '',
         email: '',
         fechaVisita: '',
-        horario: ''
+        horario: '',
+        estado: 'ACTIVADO',
     });
 
     const [errores, setErrores] = useState({});
@@ -169,7 +169,8 @@ const EducacionForm = () => {
                 telefono: '',
                 email: '',
                 fechaVisita: '',
-                horario: ''
+                horario: '',
+                estado: 'ACTIVADO',
             });
             setMostrarHorarioInput(false);
             setErrores({});
@@ -180,8 +181,10 @@ const EducacionForm = () => {
     };
 
     return (
-        <Box component="form"  onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { m: 1 } }}>
-            <Autocomplete
+        <Box component="form" onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { mb: 2 } }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} mt={2}>
+              <Autocomplete
                 options={filteredCueData}
                 getOptionLabel={(option) => `${option.id_cue} - ${option.nombre_escuela}`}
                 renderInput={(params) => <TextField {...params} label="CUE" variant="outlined" fullWidth />}
@@ -189,40 +192,42 @@ const EducacionForm = () => {
                 onChange={handleCueSelect}
                 isOptionEqualToValue={(option, value) => option.id_cue === value.id_cue}
                 renderOption={(props, option) => {
-                    const { key, ...otherProps } = props;
-                    return (
-                        <li key={key} {...otherProps}>
-                            <div>{option.id_cue} - {option.nombre_escuela}</div>
-                            <div style={{fontSize: '0.8em', color: 'gray'}}>{option.localidad}</div>
-                        </li>
-                    );
+                  const { key, ...otherProps } = props;
+                  return (
+                    <li key={key} {...otherProps}>
+                      <div>{option.id_cue} - {option.nombre_escuela}</div>
+                      <div style={{fontSize: '0.8em', color: 'gray'}}>{option.localidad}</div>
+                    </li>
+                  );
                 }}
-            />
-            <TextField
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Nombre de la Escuela"
                 variant="outlined"
                 fullWidth
                 name="nombreEscuela"
                 value={formData.nombreEscuela}
                 onChange={handleChange}
-                InputProps={{
-                    readOnly: true,
-                }}
+                InputProps={{ readOnly: true }}
                 required
-            />
-            <TextField
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Localidad de la Escuela"
                 variant="outlined"
                 fullWidth
                 name="localidadEscuela"
                 value={formData.localidadEscuela}
                 onChange={handleChange}
-                InputProps={{
-                    readOnly: true,
-                }}
+                InputProps={{ readOnly: true }}
                 required
-            />
-            <TextField
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Nombre del Director"
                 variant="outlined"
                 fullWidth
@@ -230,8 +235,10 @@ const EducacionForm = () => {
                 value={formData.nombreDirector}
                 onChange={handleChange}
                 required
-            />
-            <TextField
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Grado"
                 variant="outlined"
                 fullWidth
@@ -239,22 +246,26 @@ const EducacionForm = () => {
                 value={formData.grado}
                 onChange={handleChange}
                 required
-            />
-            <FormControl fullWidth variant="outlined" sx={{ m: 1 }}>
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth variant="outlined">
                 <InputLabel id="turno-label">Turno</InputLabel>
                 <Select
-                    labelId="turno-label"
-                    id="turno"
-                    value={formData.turno}
-                    onChange={handleChange}
-                    label="Turno"
-                    name="turno"
+                  labelId="turno-label"
+                  id="turno"
+                  value={formData.turno}
+                  onChange={handleChange}
+                  label="Turno"
+                  name="turno"
                 >
-                    <MenuItem value="Mañana">Mañana</MenuItem>
-                    <MenuItem value="Tarde">Tarde</MenuItem>
+                  <MenuItem value="Mañana">Mañana</MenuItem>
+                  <MenuItem value="Tarde">Tarde</MenuItem>
                 </Select>
-            </FormControl>
-            <TextField
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Cantidad de Alumnos"
                 variant="outlined"
                 fullWidth
@@ -266,8 +277,10 @@ const EducacionForm = () => {
                 helperText={errores.cantAlumnos}
                 InputProps={{inputProps: { min: 1, max: 25 }}}
                 required
-            />
-            <TextField
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Teléfono"
                 variant="outlined"
                 fullWidth
@@ -279,11 +292,13 @@ const EducacionForm = () => {
                 helperText={errores.telefono}
                 required
                 inputProps={{
-                    pattern: "^\\+?[\\d\\s()-]{7,}$",
-                    title: "Ingrese un número de teléfono válido"
+                  pattern: "^\\+?[\\d\\s()-]{7,}$",
+                  title: "Ingrese un número de teléfono válido"
                 }}
-            />
-            <TextField
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 label="Email"
                 variant="outlined"
                 fullWidth
@@ -294,67 +309,67 @@ const EducacionForm = () => {
                 error={!!errores.email}
                 helperText={errores.email}
                 required
-            />
-            <TextField 
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField 
                 label="Fecha de la Visita"
                 variant="outlined"
                 fullWidth
                 name="fechaVisita"
                 value={formData.fechaVisita}
                 onClick={() => setCalendarioOpen(true)}
-                InputProps={{
-                    readOnly: true,
-                }}
+                InputProps={{ readOnly: true }}
                 required
-            />
-            
+              />
+            </Grid>
             {mostrarHorarioInput && (
+              <Grid item xs={12} sm={6}>
                 <TextField 
-                    label="Horario Seleccionado"
-                    variant="outlined"
-                    fullWidth
-                    name="horario"
-                    value={formData.horario}
-                    onClick={handleHorarioInputClick}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                  label="Horario Seleccionado"
+                  variant="outlined"
+                  fullWidth
+                  name="horario"
+                  value={formData.horario}
+                  onClick={handleHorarioInputClick}
+                  InputProps={{ readOnly: true }}
                 />
+              </Grid>
             )}
-
-            <Box sx={{ display: 'flex', justifyContent: 'left', mt: 2 }}>
-                <FormControlLabel required control={<Checkbox />} label="Acepto las condiciones" />
-            </Box>
-
-
-            <Box sx={{ display: 'flex', justifyContent: 'right', mt: 2 }}>
+            <Grid item xs={12}>
+              <FormControlLabel 
+                control={<Checkbox required />} 
+                label="Acepto las condiciones" 
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <PdfDownloadComponent 
-                    pdfUrl={'./PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf'}
-                    fileName="formulario.pdf"
+                  pdfUrl={'./PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf'}
+                  fileName="formulario.pdf"
                 />
-            </Box>
-
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                <Button variant="contained" color="primary" type="submit" sx={{ width: '120px' }} endIcon={<SendIcon />}>
-                    Enviar
+                <Button variant="contained" color="primary" type="submit" style={{backgroundColor: '#8D5CF6'}}>
+                  Enviar
                 </Button>
-            </Box>
-
-            <Calendario
-                open={calendarioOpen}
-                onClose={() => setCalendarioOpen(false)}
-                onDateClick={handleDateChange}
-                selectedDate={formData.fechaVisita}
-            />
-
-            <Horario 
-                open={horarioOpen} 
-                onClose={() => setHorarioOpen(false)} 
-                onHorarioChange={handleHorarioChange} 
-                horariosOcupados={horariosOcupados}
-            />
+              </Box>
+            </Grid>
+          </Grid>
+    
+          <Calendario
+            open={calendarioOpen}
+            onClose={() => setCalendarioOpen(false)}
+            onDateClick={handleDateChange}
+            selectedDate={formData.fechaVisita}
+          />
+    
+          <Horario 
+            open={horarioOpen} 
+            onClose={() => setHorarioOpen(false)} 
+            onHorarioChange={handleHorarioChange} 
+            horariosOcupados={horariosOcupados}
+          />
         </Box>
-    );
-};
-
-export default EducacionForm;
+      );
+    };
+    
+    export default EducacionForm;

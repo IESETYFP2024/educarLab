@@ -27,7 +27,7 @@ const Calendario = ({ open, onClose, onDateClick, selectedDate }) => {
     useEffect(() => {
         if (selectedDate) {
             const [day, month, year] = selectedDate.split('/');
-            setDiaActual(new Date(year, month - 1, day));
+            setDiaActual(new Date(year, month, day));
         }
     }, [selectedDate]);
 
