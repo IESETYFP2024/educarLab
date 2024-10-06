@@ -12,6 +12,7 @@ const DocenteForm = ({talleres}) => {
     dni: '',
     email: '',
     telefono: '',
+    estado: 'ACTIVADO',
   });
 
   const handleChange = (e) => {
@@ -22,12 +23,17 @@ const DocenteForm = ({talleres}) => {
     });
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:3000/post/docente",{
         ...formData, tallerTitulo: talleres[index].titulo,
-        tallerFecha: talleres[index].fecha,
+        tallerFecha: formatDate(talleres[index].fecha),
       });
       alert('El turno se agregó');
       setFormData({
@@ -36,6 +42,7 @@ const DocenteForm = ({talleres}) => {
         dni: '',
         email: '',
         telefono: '',
+        estado: 'ACTIVADO',
       });
     } catch (error) {
       console.error('Error al enviar el formulario', error);
@@ -90,7 +97,7 @@ const DocenteForm = ({talleres}) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            value={tallerActual.fecha}  
+            value={formatDate(tallerActual.fecha)}  
             disabled
             sx={{ mb: 2 }}
           />

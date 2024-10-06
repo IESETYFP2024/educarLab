@@ -26,8 +26,7 @@ const Calendario = ({ open, onClose, onDateClick, selectedDate }) => {
 
     useEffect(() => {
         if (selectedDate) {
-            const [day, month, year] = selectedDate.split('/');
-            setDiaActual(new Date(year, month, day));
+            setDiaActual(new Date(selectedDate));
         }
     }, [selectedDate]);
 
@@ -58,11 +57,7 @@ const Calendario = ({ open, onClose, onDateClick, selectedDate }) => {
                 return '';  
             }
 
-            const formattedDate = new Intl.DateTimeFormat('es-ES', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            }).format(date);
+            const formattedDate = date.toISOString().split('T')[0];
             if (fechasSinHorarios.includes(formattedDate)) {
                 return 'no-horarios';
             }

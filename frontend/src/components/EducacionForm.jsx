@@ -109,11 +109,12 @@ const EducacionForm = () => {
     };
 
     const handleDateChange = async (date) => {
-        const formattedDate = new Intl.DateTimeFormat('es-ES', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        }).format(date);
+        //const formattedDate = new Intl.DateTimeFormat('es-ES', {
+            //day: '2-digit',
+            //month: '2-digit',
+            //year: 'numeric'
+        //}).format(date);
+        const formattedDate = date.toISOString().split('T')[0];
         setFormData(prev => ({ ...prev, fechaVisita: formattedDate }));
         try {
             const response = await axios.get(`http://localhost:3000/horarios/ocupados?fechaVisita=${formattedDate}`);

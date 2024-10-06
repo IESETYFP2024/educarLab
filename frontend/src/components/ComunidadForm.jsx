@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, Grid, Typography, CardMedia, IconButton } from '@mui/material';
+import { TextField, Button, Box, Grid, Typography, CardMedia, IconButton} from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import axios from 'axios';
@@ -13,6 +13,7 @@ const ComunidadForm = ({talleres}) => {
     nombreApellidoTutor: '',
     telefono: '',
     email: '',
+    estado: 'ACTIVADO',
   });
 
   const handleChange = (e) => {
@@ -23,12 +24,18 @@ const ComunidadForm = ({talleres}) => {
     });
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await axios.post("http://localhost:3000/post/comunidad", {
         ...formData, tallerTitulo: talleres[index].titulo,
-        tallerFecha: talleres[index].fecha,
+        tallerFecha: formatDate(talleres[index].fecha),
       });
       alert('El turno se agregó');
       setFormData({
@@ -38,6 +45,7 @@ const ComunidadForm = ({talleres}) => {
         nombreApellidoTutor: '',
         telefono: '',
         email: '',
+        estado: 'ACTIVADO',
       });
     } catch (error) {
       console.error('Error al enviar el formulario', error);
@@ -93,7 +101,7 @@ const ComunidadForm = ({talleres}) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            value={tallerActual.fecha}  
+            value={formatDate(tallerActual.fecha)}  
             disabled
             sx={{ mb: 2 }}
           />

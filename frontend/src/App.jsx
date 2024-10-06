@@ -12,7 +12,7 @@ import axios from 'axios';
 
 function App() {
   // useStates para manejar el formulario actual y la existencia de cursos
-  const [formActual, setFormActual] = useState('educacion');
+  const [formActual, setFormActual] = useState('Visitas Escuelas');
   const [comunidadData, setComunidadData] = useState(null);
   const [docenteData, setDocenteData] = useState(null);
 
@@ -42,7 +42,7 @@ function App() {
 
   // Controlador de eventos para cambio en el formulario, pone el formActual al valor "educacion"
   const handleEducacionClick = () => {
-    setFormActual('educacion');
+    setFormActual('Visitas Escuelas');
   };
 
   // Controlador de eventos para cambio en el formulario, agarra el valor del select, y lo pone en el formActual
@@ -53,7 +53,7 @@ function App() {
 
   // Controlador de eventos para cambio en el formulario, manda al usuario al inicio del sistema
   const handleReturnHome = () => {
-    if (formActual === 'educacion' || formActual === 'taller Docente' || formActual === 'taller Comunidad') {
+    if (formActual === 'Visitas Escuelas' || formActual === 'taller Docente' || formActual === 'taller Comunidad') {
       setFormActual('');
     } else {
       window.location.href = './public/ConectarLab.html';  
@@ -78,7 +78,7 @@ function App() {
       <img
         src="/educarlablogo.png"
         alt="logo educar"
-        style={{ width: 'auto', height: '50px', cursor: 'pointer' }}
+        style={{ width: 'auto', height: '10vh', cursor: 'pointer'}}
         onClick={handleLogoClick}
       />
     </Box>
@@ -86,7 +86,7 @@ function App() {
     <Card sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Typography variant="h5" component="div" gutterBottom sx={{ textAlign: "center", fontWeight: 'bold' }}>
-          Formulario de Inscripción
+          Formulario de Inscripción {formActual}
         </Typography>
         
         <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -119,7 +119,7 @@ function App() {
         </Grid>
 
         <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
-          {formActual === 'educacion' && <EducacionForm />}
+          {formActual === 'Visitas Escuelas' && <EducacionForm />}
           {formActual === 'taller Docente' && (
             docenteData ? <DocenteForm talleres={docenteData}/> : <Typography variant="h4" align="center">Próximamente</Typography>
           )}
