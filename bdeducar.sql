@@ -14,14 +14,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Volcando estructura para tabla ejemplo.bdcue
+-- Volcando estructura para tabla conectarlab.bdcue
 CREATE TABLE IF NOT EXISTS `bdcue` (
-  `id_cue` int(9) DEFAULT NULL,
+  `id_cue` int(9) NOT NULL,
   `nombre_escuela` varchar(93) DEFAULT NULL,
   `localidad` varchar(28) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Volcando datos para la tabla ejemplo.bdcue: ~3.056 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.bdcue: ~3.056 rows (aproximadamente)
 INSERT INTO `bdcue` (`id_cue`, `nombre_escuela`, `localidad`) VALUES
 	(220000100, 'JARDIN DE INFANTES Nº 84 - ALAS DE LIBERTAD', 'RESISTENCIA'),
 	(220000101, 'JARDIN DE INFANTES Nº 84 - ALAS DE LIBERTAD', 'RESISTENCIA'),
@@ -3080,7 +3080,7 @@ INSERT INTO `bdcue` (`id_cue`, `nombre_escuela`, `localidad`) VALUES
 	(220281900, 'P.E. BLA BILINGUE INTERCULTURAL - VOLVER A LA ESCUELA-', 'PUERTO TIROL'),
 	(220282000, 'E.S.J.A Nº 19', 'TACO POZO');
 
--- Volcando estructura para tabla ejemplo.comentarios
+-- Volcando estructura para tabla conectarlab.comentarios
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL DEFAULT '',
@@ -3088,90 +3088,84 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   PRIMARY KEY (`id_comentario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla ejemplo.comentarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.comentarios: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla ejemplo.escuelas
+-- Volcando estructura para tabla conectarlab.escuelas
 CREATE TABLE IF NOT EXISTS `escuelas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_escuela` varchar(50) DEFAULT NULL,
-  `localidad_escuela` varchar(50) DEFAULT NULL,
-  `nombre_director` varchar(50) DEFAULT NULL,
-  `grado_escuela` varchar(50) DEFAULT NULL,
-  `turno` varchar(50) DEFAULT NULL,
-  `cantidad_alumnos` int(11) DEFAULT NULL,
-  `telefono` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `fecha` varchar(50) DEFAULT NULL,
-  `horario` varchar(50) DEFAULT NULL,
-  `cue` int(15) DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT 1,
+  `nombre_escuela` varchar(50) NOT NULL,
+  `localidad_escuela` varchar(50) NOT NULL,
+  `nombre_director` varchar(50) NOT NULL,
+  `grado_escuela` varchar(50) NOT NULL,
+  `turno` varchar(50) NOT NULL,
+  `cantidad_alumnos` int(11) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `fecha` date NOT NULL,
+  `horario` varchar(50) NOT NULL,
+  `cue` int(15) NOT NULL,
+  `estado` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla ejemplo.escuelas: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.escuelas: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla ejemplo.inscripciones_comunidad
+-- Volcando estructura para tabla conectarlab.inscripciones_comunidad
 CREATE TABLE IF NOT EXISTS `inscripciones_comunidad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_alumno` varchar(50) DEFAULT NULL,
-  `edad` int(11) DEFAULT NULL,
-  `fecha_nacimiento` varchar(50) DEFAULT NULL,
-  `nombre_tutor` varchar(50) DEFAULT NULL,
-  `telefono_tutor` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `taller_titulo` varchar(50) DEFAULT NULL,
-  `taller_fecha` varchar(50) DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT 1,
+  `nombre_alumno` varchar(50) NOT NULL,
+  `edad` int(11) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `nombre_tutor` varchar(50) NOT NULL,
+  `telefono_tutor` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `taller_titulo` varchar(50) NOT NULL,
+  `taller_fecha` date NOT NULL,
+  `estado` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla ejemplo.inscripciones_comunidad: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.inscripciones_comunidad: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla ejemplo.inscripciones_docente
+-- Volcando estructura para tabla conectarlab.inscripciones_docente
 CREATE TABLE IF NOT EXISTS `inscripciones_docente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_docente` varchar(50) DEFAULT NULL,
-  `escuela` varchar(50) DEFAULT NULL,
-  `dni` int(11) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `telefono` varchar(50) DEFAULT NULL,
-  `taller_titulo` varchar(50) DEFAULT NULL,
-  `taller_fecha` varchar(50) DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT 1,
+  `nombre_docente` varchar(50) NOT NULL,
+  `escuela` varchar(50) NOT NULL,
+  `dni` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
+  `taller_titulo` varchar(50) NOT NULL,
+  `taller_fecha` date NOT NULL,
+  `estado` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla ejemplo.inscripciones_docente: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.inscripciones_docente: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla ejemplo.talleres_comunidad
+-- Volcando estructura para tabla conectarlab.talleres_comunidad
 CREATE TABLE IF NOT EXISTS `talleres_comunidad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(50) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  `fecha` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `imagen` varchar(300) NOT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla ejemplo.talleres_comunidad: ~2 rows (aproximadamente)
-INSERT INTO `talleres_comunidad` (`id`, `titulo`, `imagen`, `fecha`, `descripcion`) VALUES
-	(1, 'taller econaturas de resistencia chaco', 'https://lh3.googleusercontent.com/d/1GfSi1HmuNcejmQMACq-DOIDzTa3dc_Nj=w1920-h1080', '24-06-2024', 'awefwaefawefawefawefwaefwaef'),
-	(2, 'econaturas', NULL, '25-06-24', NULL);
+-- Volcando datos para la tabla conectarlab.talleres_comunidad: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla ejemplo.talleres_docentes
+-- Volcando estructura para tabla conectarlab.talleres_docentes
 CREATE TABLE IF NOT EXISTS `talleres_docentes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(50) DEFAULT NULL,
-  `imagen` varchar(150) DEFAULT NULL,
-  `fecha` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `imagen` varchar(150) NOT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla ejemplo.talleres_docentes: ~2 rows (aproximadamente)
-INSERT INTO `talleres_docentes` (`id`, `titulo`, `imagen`, `fecha`, `descripcion`) VALUES
-	(1, 'awdawd', 'https://lh3.googleusercontent.com/d/13Ia0NIaGdI_IjUyEZuoVzN6bJ9qoD7fA=w1920-h1080', '25-06-24', NULL),
-	(2, 'jajajaja', NULL, '27-06-24', NULL);
+-- Volcando datos para la tabla conectarlab.talleres_docentes: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
