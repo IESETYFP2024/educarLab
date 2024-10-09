@@ -53,15 +53,19 @@ function App() {
 
   // Controlador de eventos para cambio en el formulario, manda al usuario al inicio del sistema
   const handleReturnHome = () => {
-    if (formActual === 'Visitas Escuelas' || formActual === 'taller Docente' || formActual === 'taller Comunidad') {
-      setFormActual('');
+    if (formActual === 'taller Docente' || formActual === 'taller Comunidad') {
+      setFormActual('Visitas Escuelas');
     } else {
-      window.location.href = './public/ConectarLab.html';  
+      window.location.href = '/ConectarLab.html';  
     }
   };
 
   const handleLogoClick= () =>{
-    setFormActual('')
+    if (formActual === 'taller Docente' || formActual === 'taller Comunidad') {
+      setFormActual('Visitas Escuelas');
+    } else {
+      window.location.href = '/ConectarLab.html';  
+    }
   }
 
   return (
@@ -96,7 +100,7 @@ function App() {
               color="primary"
               onClick={handleEducacionClick}
               fullWidth
-              style={{backgroundColor: '#8D5CF6'}}
+              style={{backgroundColor: '#8D5CF6', height:'55px'}}
             >
               Visitas Escuelas
             </Button>

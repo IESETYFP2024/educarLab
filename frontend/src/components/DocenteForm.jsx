@@ -171,6 +171,7 @@ const DocenteForm = ({talleres}) => {
           color="primary" 
           type="submit" 
           sx={{ minWidth: '120px' }}
+          style={{backgroundColor: '#8D5CF6'}}
         >
           Enviar
         </Button>

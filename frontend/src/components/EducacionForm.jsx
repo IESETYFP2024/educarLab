@@ -344,12 +344,12 @@ const EducacionForm = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <PdfDownloadComponent 
                   pdfUrl={'./PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf'}
                   fileName="formulario.pdf"
                 />
-                <Button variant="contained" color="primary" type="submit" style={{backgroundColor: '#8D5CF6'}}>
+                <Button variant="contained" color="primary" type="submit" style={{backgroundColor: '#8D5CF6', marginLeft:'5px'}}>
                   Enviar
                 </Button>
               </Box>
