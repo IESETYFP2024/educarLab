@@ -18,9 +18,9 @@ const EducacionForm = () => {
         telefono: '',
         email: '',
         fechaVisita: '',
-        horario: ''
+        horario: '',
     });
-
+//default para todos los formularios como default
     const [errores, setErrores] = useState({});
     const [calendarioOpen, setCalendarioOpen] = useState(false);
     const [horarioOpen, setHorarioOpen] = useState(false);
