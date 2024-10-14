@@ -24,7 +24,7 @@ const PdfDownloadComponent = ({ pdfUrl, fileName }) => {
   
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleDownload}>
+      <Button variant="contained" color="primary" onClick={handleDownload} style={{backgroundColor: '#8D5CF6'}}>
         Descargar PDF
       </Button>
     </div>

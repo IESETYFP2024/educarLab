@@ -3,9 +3,9 @@ import db from "../db/conexion.js";
 export async function PostTurnoComunidad(request) {
     const data = request.body;
     console.log(data)
-    const campos = "nombre_alumno, edad, fecha_nacimiento, nombre_tutor, telefono_tutor, email, taller_titulo, taller_fecha"
-    await db.execute("INSERT INTO inscripciones_comunidad ("+campos+") VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-        [data.nombreApellido, data.edad, data.fechaNacimiento, data.nombreApellidoTutor, data.telefono, data.email, data.tallerTitulo, data.tallerFecha]);
+    const campos = "nombre_alumno, edad, fecha_nacimiento, nombre_tutor, telefono_tutor, email, taller_titulo, taller_fecha, estado"
+    await db.execute("INSERT INTO inscripciones_comunidad ("+campos+") VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)", 
+        [data.nombreApellido, data.edad, data.fechaNacimiento, data.nombreApellidoTutor, data.telefono, data.email, data.tallerTitulo, data.tallerFecha, data.estado]);
 }
 
 export async function getComunidadData() {

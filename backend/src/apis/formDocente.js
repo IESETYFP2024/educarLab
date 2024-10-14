@@ -4,9 +4,9 @@ import db from "../db/conexion.js";
 export async function PostTurnoDocente(request) {
     const data = request.body;
     console.log(data)
-    const campos = "nombre_docente, escuela, dni, email, telefono, taller_titulo, taller_fecha"
-    await db.execute("INSERT INTO inscripciones_docente ("+campos+") VALUES (?, ?, ?, ?, ?, ?,?)", 
-        [data.nombreApellido, data.escuela, data.dni, data.email, data.telefono, data.tallerTitulo, data.tallerFecha]);
+    const campos = "nombre_docente, escuela, dni, email, telefono, taller_titulo, taller_fecha, estado"
+    await db.execute("INSERT INTO inscripciones_docente ("+campos+") VALUES (?, ?, ?, ?, ?, ?,?,?)", 
+        [data.nombreApellido, data.escuela, data.dni, data.email, data.telefono, data.tallerTitulo, data.tallerFecha, data.estado]);
 }
 
 export async function getDocenteData() {
