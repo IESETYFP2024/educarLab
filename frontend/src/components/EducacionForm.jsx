@@ -87,7 +87,7 @@ const EducacionForm = () => {
                 if (!/^\d+$/.test(value) || value.length < 1) error = 'CUE debe ser un número válido';
                 break;
             case 'cantAlumnos':
-                if (value < 1 || value > 25) error = 'Cantidad de Alumnos debe ser entre 1 y 25';
+                if (value < 1 || value > 25) error = 'Para turnos de más de 25 alumnos, comunicarse por correo.';
                 break;
                 case 'telefono':
                     if (!/^\+?[\d\s()-]{7,}$/.test(value)) error = 'Teléfono debe ser un número válido';
@@ -340,8 +340,15 @@ const EducacionForm = () => {
             <Grid item xs={12}>
               <FormControlLabel 
                 control={<Checkbox required />} 
-                label="Acepto las condiciones" 
+                label="Acepto los términos y condiciones de uso" 
               />
+              <Button 
+              variant='outlined'
+              required
+              style={{backgroundColor: '#8D5CF6'}}
+              >
+              Ver Pdf
+              </Button>
             </Grid>
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -349,7 +356,7 @@ const EducacionForm = () => {
                   pdfUrl={'./PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf'}
                   fileName="formulario.pdf"
                 />
-                <Button variant="contained" color="primary" type="submit" style={{backgroundColor: '#8D5CF6', marginLeft:'5px'}}>
+                <Button variant="contained" type="submit" style={{backgroundColor: '#8D5CF6', marginLeft:'5px'}}>
                   Enviar
                 </Button>
               </Box>
@@ -370,7 +377,9 @@ const EducacionForm = () => {
             horariosOcupados={horariosOcupados}
           />
         </Box>
+        
       );
+      
     };
     
     export default EducacionForm;

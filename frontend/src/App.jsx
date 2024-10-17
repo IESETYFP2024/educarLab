@@ -72,12 +72,13 @@ function App() {
     <Container maxWidth="md" sx={{ py: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
       <Button
-        variant="outlined"
+        variant="contained"
         color="secondary"
         onClick={handleReturnHome}
-        sx={{ minWidth: 'unset', width: '50px', height: '50px', p: 0 }}
+        sx={{ minWidth: 'unset', width: '100px', height: '50px', p: 0, fontWeight:'1000', backgroundColor:'#8D5CF6', color:'white'}}
       >
-        <HomeIcon />
+        <HomeIcon style={{padding:'0px 0px 6px 0px'}}/>
+        Inicio
       </Button>
       <img
         src="/educarlablogo.png"
@@ -90,7 +91,7 @@ function App() {
     <Card sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Typography variant="h5" component="div" gutterBottom sx={{ textAlign: "center", fontWeight: 'bold' }}>
-          Formulario de Inscripción {formActual}
+          Formulario de Inscripción
         </Typography>
         
         <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -111,10 +112,10 @@ function App() {
                 value={['taller Docente', 'taller Comunidad'].includes(formActual) ? formActual : ''}
                 displayEmpty
                 onChange={handleComunidadChange}
-                renderValue={(selected) => selected || "Talleres Abiertos a la Comunidad"}
+                renderValue={(selected) => selected || "Talleres Abiertos "}
                 style={{backgroundColor: '#8D5CF6', color: 'white'}}
               >
-                <MenuItem value="" disabled>Talleres Abiertos a la Comunidad</MenuItem>
+                <MenuItem value="" disabled>Talleres Abiertos </MenuItem>
                 <MenuItem value="taller Docente">Talleres Docentes</MenuItem>
                 <MenuItem value="taller Comunidad">Talleres Comunidad</MenuItem>
               </Select>
@@ -135,6 +136,9 @@ function App() {
     </Card>
   </Container>
 );
+
+//Pie de Pagina EducarLab, Comienza desde Donde Visitarnos?
+
 }
 
 export default App;
