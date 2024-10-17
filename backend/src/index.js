@@ -72,7 +72,10 @@ app.get('/horarios/ocupados', async (req, res) => {
 
 app.get('/fechas-sin-horarios' , async (req, res) =>{
   try{
-    const fechasSinHorarios = await getFechasOcupadas();
+    const fechasOcupadas= await getFechasOcupadas();
+    const fechasSinHorarios = fechasOcupadas.map(fecha => 
+      new Date(fecha).toISOString().split('T')[0]
+    );
     res.json({fechasSinHorarios});
   } catch(error){
     console.error('Error al traer las fechas sin horarios: ', error);
