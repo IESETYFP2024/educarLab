@@ -8,6 +8,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import EducacionForm from './components/EducacionForm';
 import ComunidadForm from './components/ComunidadForm';
 import DocenteForm from './components/DocenteForm';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '/public/estilo.css'
 import './App.css'
 import '/public/estilo.css'; 
 import axios from 'axios';
@@ -139,6 +142,9 @@ function App() {
       </CardContent>
     </Card>
   </Container>
+
+
+  
   {/* Footer Section outside the Container */}
   <footer className="footer" style={{marginTop: '20px'}}>
         <div className="container">
@@ -198,6 +204,9 @@ function App() {
         </div>
       </footer>
   </>
+//Pie de Pagina EducarLab, Comienza desde Donde Visitarnos?
+);
+
 //Pie de Pagina EducarLab, Comienza desde Donde Visitarnos?
 );
 }

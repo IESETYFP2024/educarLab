@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Autocomplete, Grid} from '@mui/material';
+import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Autocomplete, Grid, Switch, Typography} from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
 import Calendario from './Calendario';
 import Horario from './Horario';
 import PdfDownloadComponent from './Pdf';
@@ -28,10 +29,19 @@ const EducacionForm = () => {
     const [horariosOcupados, setHorariosOcupados] = useState([]);
     const [cueData, setCueData] = useState([]);
     const [filteredCueData, setFilteredCueData] = useState([]);
+    const [descargaWord, setDescargaWord] = useState(false)
 
     useEffect(() => {
         fetchCueData();
     }, []);
+
+    const handleDescarga = ()=>{
+      const link = document.createElement("a");
+      link.href = "/public/AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES- ConectarLAB Chaco.docx";
+      link.download = 'AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES';
+      link.click();
+      setDescargaWord(true)
+    }
     
     const fetchCueData = async () => {
         try {
@@ -141,7 +151,11 @@ const EducacionForm = () => {
         if (!formData.horario) {
             alert('Por favor, seleccione un horario');
             return;
+        }else if(!descargaWord){
+          alert('Por favor, descargue el formulario de autorizacion de imagen a traves del boton: "Descargar Formulario"')
+          return;
         }
+        
 
         const formErrores = Object.keys(formData).reduce((acc, key) => {
 
@@ -337,25 +351,59 @@ const EducacionForm = () => {
                 />
               </Grid>
             )}
-            <Grid item xs={12}>
+            
+            <Grid item xs={12} alignItems="center">
               <FormControlLabel 
                 control={<Checkbox required />} 
                 label="Acepto los términos y condiciones de uso" 
               />
               <Button 
-              variant='outlined'
+              variant='contained'
               required
               style={{backgroundColor: '#8D5CF6'}}
+              onClick={()=>{
+                window.open('/public/PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf', '_blank');
+              }}
               >
               Ver Pdf
               </Button>
             </Grid>
+            <Grid container alignItems="center">
+            <Typography style={{marginLeft:25}}>
+            Formulario de autorización de Imagen
+            </Typography>
+            <Button
+              onClick={handleDescarga}
+              variant="contained"
+              style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
+            >
+              Descargar Formulario <DownloadIcon />
+          </Button>
+            </Grid>
+
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <PdfDownloadComponent 
-                  pdfUrl={'./PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf'}
-                  fileName="formulario.pdf"
-                />
+                <Button variant="contained" style={{backgroundColor: '#8D5CF6'}} onClick={()=>{
+                  setFormData({
+                    cue: '',
+                    nombreEscuela: '',
+                    localidadEscuela: '',
+                    nombreDirector: '',
+                    grado: '',
+                    turno: 'Mañana',
+                    cantAlumnos: '',
+                    telefono: '',
+                    email: '',
+                    fechaVisita: '',
+                    horario: '',
+                    estado: 'ACTIVADO',
+                });
+                setMostrarHorarioInput(false);
+                setErrores({});
+                
+                }}>
+                  Cancelar
+                </Button>
                 <Button variant="contained" type="submit" style={{backgroundColor: '#8D5CF6', marginLeft:'5px'}}>
                   Enviar
                 </Button>
@@ -377,7 +425,9 @@ const EducacionForm = () => {
             horariosOcupados={horariosOcupados}
           />
         </Box>
-        
+        //<a href="public/AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES- ConectarLAB Chaco.docx" download>
+        //<button>Descargar Formulario</button>
+        //</a>
       );
       
     };
