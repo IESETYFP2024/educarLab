@@ -3,10 +3,13 @@ import React, { useState, useEffect } from 'react';
 
 import { Button, Container, Card, CardContent, Typography, MenuItem, Select, FormControl, Box, Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import EducacionForm from './components/EducacionForm';
 import ComunidadForm from './components/ComunidadForm';
 import DocenteForm from './components/DocenteForm';
 import './App.css'
+import '/public/estilo.css'; 
 import axios from 'axios';
 
 
@@ -69,6 +72,7 @@ function App() {
   }
 
   return (
+    <>
     <Container maxWidth="md" sx={{ py: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
       <Button
@@ -135,10 +139,67 @@ function App() {
       </CardContent>
     </Card>
   </Container>
-);
+  {/* Footer Section outside the Container */}
+  <footer className="footer" style={{marginTop: '20px'}}>
+        <div className="container">
+          <div className="row">
+            {/* Column for Contact Information */}
+            <div className="col-md-4">
+              <h5>¿Dónde visitarnos?</h5>
+              <p>
+                Si necesitas más información comunicate en{' '}
+                <a href="mailto:conectarlab@sitechaco.edu.ar">conectarlab@sitechaco.edu.ar</a>{' '}
+                o si querés ser parte del equipo.
+              </p>
+              <p><i className="num-contacto"></i> +54 3625175481</p>
+              <div className="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100083376645313&locale=es_LA"><i className="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/conectarlabchaco/"><i className="fab fa-instagram"></i></a>
+                <a href="https://x.com/conectar_LAB"><i className="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/channel/UCJHhJBtk8jtfIQ5B1H7iyVw"><i className="fab fa-youtube"></i></a>
+              </div>
+            </div>
 
+            {/* Column for Navigation Links */}
+            <div className="col-md-6 offset-md-2">
+              <h5>Nosotros</h5>
+              <ul className="list-unstyled">
+                <li><a href="#pasos">Reservas</a></li>
+                <li><a href="nosotros.html">EducarLab</a></li>
+                <li><a href="#virtual">360</a></li>
+                <li><a href="#ConectarLAB">Actividades</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Bottom Section */}
+        <div className="footer-bottom" style={{ marginTop: '20px', textAlign: 'center' }}>
+          <div className="container-logos">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="logo_container">
+                  <img src="/src/assets/img/logos/Logo Chaco.png" alt="Logo Chaco" />
+                  <img src="/src/assets/img/logos/Logo educar.png" alt="Logo Educar" />
+                  <img src="/src/assets/img/logos/Logo Fontana.png" alt="Logo Fontana" />
+                  <img src="/src/assets/img/logos/Logo Ministerio.png" alt="Logo Ministerio" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-12 finaltext">
+            <div className="izquierda">
+              <p>Copyright &copy; 2024 EducarLab | Design by IESETyFP</p>
+            </div>
+            <div className="derecha">
+              <p><a href="#">Términos y Condiciones</a> | <a href="#">Política de Privacidad</a></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+  </>
 //Pie de Pagina EducarLab, Comienza desde Donde Visitarnos?
-
+);
 }
 
 export default App;
