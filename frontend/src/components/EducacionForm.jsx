@@ -367,21 +367,19 @@ const EducacionForm = () => {
               >
               Ver Pdf
               </Button>
-              <FormControlLabel
-              control={
-              <Button 
-              onClick={handleDescarga} 
-              variant="contained" 
-              style={{ backgroundColor: '#8D5CF6' }}
-              >
-              Descargar Formulario <DownloadIcon></DownloadIcon>
-              </Button>
-              }
-              label="Formulario de autorización de Imagen"
-              labelPlacement="start" 
-            />
             </Grid>
-
+            <Grid container alignItems="center">
+            <Typography style={{marginLeft:25}}>
+            Formulario de autorización de Imagen
+            </Typography>
+            <Button
+              onClick={handleDescarga}
+              variant="contained"
+              style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
+            >
+              Descargar Formulario <DownloadIcon />
+          </Button>
+            </Grid>
 
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -400,6 +398,9 @@ const EducacionForm = () => {
                     horario: '',
                     estado: 'ACTIVADO',
                 });
+                setMostrarHorarioInput(false);
+                setErrores({});
+                
                 }}>
                   Cancelar
                 </Button>
