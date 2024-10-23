@@ -3,7 +3,6 @@ import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, Chec
 import DownloadIcon from '@mui/icons-material/Download';
 import Calendario from './Calendario';
 import Horario from './Horario';
-import PdfDownloadComponent from './Pdf';
 import axios from 'axios';
 
 const EducacionForm = () => {
@@ -368,7 +367,7 @@ const EducacionForm = () => {
               Ver Pdf
               </Button>
             </Grid>
-            <Grid container alignItems="center">
+            <Grid container alignItems="center" sx={{mt:1}}>
             <Typography style={{marginLeft:25}}>
             Formulario de autorización de Imagen
             </Typography>
@@ -377,7 +376,7 @@ const EducacionForm = () => {
               variant="contained"
               style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
             >
-              Descargar Formulario <DownloadIcon />
+              Formulario <DownloadIcon />
           </Button>
             </Grid>
 

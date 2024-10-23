@@ -73,7 +73,7 @@ function App() {
 
   return (
     <>
-    <Container maxWidth="md" sx={{ py: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Container maxWidth="md" sx={{ py: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
       <Button
         variant="contained"
@@ -110,7 +110,7 @@ function App() {
               Visitas Escuelas
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6} >
             <FormControl fullWidth>
               <Select
                 value={['taller Docente', 'taller Comunidad'].includes(formActual) ? formActual : ''}
@@ -141,12 +141,9 @@ function App() {
   </Container>
 
 
-  
-  {/* Footer Section outside the Container */}
   <footer className="footer" style={{marginTop: '20px'}}>
         <div className="container">
           <div className="row">
-            {/* Column for Contact Information */}
             <div className="col-md-4">
               <h5>¿Dónde visitarnos?</h5>
               <p>
@@ -163,7 +160,6 @@ function App() {
               </div>
             </div>
 
-            {/* Column for Navigation Links */}
             <div className="col-md-6 offset-md-2">
               <h5>Nosotros</h5>
               <ul className="list-unstyled">
@@ -176,7 +172,6 @@ function App() {
           </div>
         </div>
 
-        {/* Footer Bottom Section */}
         <div className="footer-bottom" style={{ marginTop: '20px', textAlign: 'center' }}>
           <div className="container-logos">
             <div className="row">
@@ -201,11 +196,7 @@ function App() {
         </div>
       </footer>
   </>
-//Pie de Pagina EducarLab, Comienza desde Donde Visitarnos?
+
 );
-
-//Pie de Pagina EducarLab, Comienza desde Donde Visitarnos?
-
 }
-
 export default App;
