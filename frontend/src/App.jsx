@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import { Button, Container, Card, CardContent, Typography, MenuItem, Select, FormControl, Box, Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import EducacionForm from './components/EducacionForm';
 import ComunidadForm from './components/ComunidadForm';
 import DocenteForm from './components/DocenteForm';
@@ -10,6 +12,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '/public/estilo.css'
 import './App.css'
+import '/public/estilo.css'; 
 import axios from 'axios';
 
 

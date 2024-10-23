@@ -6,7 +6,7 @@ try {
    DB = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: 'lucas24',
+      password: '',
       database: 'conectarlab',
     });
 } catch (err) {
