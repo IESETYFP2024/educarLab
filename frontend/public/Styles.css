@@ -6,6 +6,10 @@
 */
 /*Barra de Navegacion*/
 /*BARRA DE NAVEGACION*/
+
+body{
+    overflow-x: hidden;
+}
 #barradenavegacion {
     background-color: #252D4F;
     top: 0;
@@ -443,7 +447,6 @@ img, svg {
     background-color: #69349b;
     border-color: #9B51E0;
 }
-
 
 
 /*CARRUSEL LABORATORIO*/

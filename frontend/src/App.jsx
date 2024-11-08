@@ -60,11 +60,7 @@ function App() {
 
   // Función para redirigir al usuario al inicio del sistema o cambiar el formulario a "Visitas Escuelas"
   const handleReturnHome = () => {
-<<<<<<< HEAD
-    if (formActual === 'taller Docente' || formActual === 'taller Comunidad') {
-=======
     if (formActual === 'Taller Docente' || formActual === 'Taller Comunidad') {
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
       setFormActual('Visitas Escuelas');
     } else {
       window.location.href = '/EducarLab.html';  
@@ -73,11 +69,7 @@ function App() {
 
   // Similar a handleReturnHome, pero para cuando el usuario hace clic en el logo
   const handleLogoClick= () => {
-<<<<<<< HEAD
-    if (formActual === 'taller Docente' || formActual === 'taller Comunidad') {
-=======
     if (formActual === 'Taller Docente' || formActual === 'Taller Comunidad') {
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
       setFormActual('Visitas Escuelas');
     } else {
       window.location.href = '/EducarLab.html';  
@@ -132,24 +124,15 @@ function App() {
               <FormControl fullWidth>
                 {/* Select para elegir entre talleres de Comunidad y Docentes */}
                 <Select
-<<<<<<< HEAD
-                  value={['taller Docente', 'taller Comunidad'].includes(formActual) ? formActual : ''}
-=======
                   value={['Taller Docente', 'Taller Comunidad'].includes(formActual) ? formActual : ''}
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
                   displayEmpty
                   onChange={handleComunidadChange}
                   renderValue={(selected) => selected || "Talleres Abiertos "}
                   style={{backgroundColor: '#8D5CF6', color: 'white'}}
                 >
                   <MenuItem value="" disabled>Talleres Abiertos </MenuItem>
-<<<<<<< HEAD
-                  <MenuItem value="taller Docente">Talleres Docentes</MenuItem>
-                  <MenuItem value="taller Comunidad">Talleres Comunidad</MenuItem>
-=======
                   <MenuItem value="Taller Docente">Talleres Docentes</MenuItem>
                   <MenuItem value="Taller Comunidad">Talleres Comunidad</MenuItem>
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
                 </Select>
               </FormControl>
             </Grid>
@@ -158,17 +141,10 @@ function App() {
           {/* Renderizado condicional de componentes de formulario */}
           <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
             {formActual === 'Visitas Escuelas' && <EducacionForm />}
-<<<<<<< HEAD
-            {formActual === 'taller Docente' && (
-              docenteData ? <DocenteForm talleres={docenteData}/> : <Typography variant="h4" align="center">Próximamente</Typography>
-            )}
-            {formActual === 'taller Comunidad' && (
-=======
             {formActual === 'Taller Docente' && (
               docenteData ? <DocenteForm talleres={docenteData}/> : <Typography variant="h4" align="center">Próximamente</Typography>
             )}
             {formActual === 'Taller Comunidad' && (
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
               comunidadData ? <ComunidadForm talleres={comunidadData}/> : <Typography variant="h4" align="center">Próximamente</Typography>
             )}
           </Box>
@@ -201,17 +177,10 @@ function App() {
             <div className="col-md-6 offset-md-2">
               <h5>Nosotros</h5>
               <ul className="list-unstyled">
-<<<<<<< HEAD
-                <li><a href="">Reservas</a></li>
-                <li><a href="nosotros.html">EducarLab</a></li>
-                <li><a href="EducarLab.html">360</a></li>
-                <li><a href="EducarLab.html">Actividades</a></li>
-=======
                 <li><a href="#pasos">Reservas</a></li>
                 <li><a href="nosotros.html">EducarLab</a></li>
                 <li><a href="#virtual">360</a></li>
                 <li><a href="#Labs">Actividades</a></li>
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
               </ul>
             </div>
           </div>

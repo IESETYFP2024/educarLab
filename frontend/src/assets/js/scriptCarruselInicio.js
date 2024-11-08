@@ -156,13 +156,9 @@ function loadTalleres() {
                 <div class="container">
                      <div class="text-section">
                          <h3>CENTRO EDUCATIVO TECNOLOGICO</h3>
-<<<<<<< HEAD
-                         <h4>EDUC.AR LAB</h4>
-=======
-                         <h4>CONECTAR LAB CHACO</h4>
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
+                         <h4>EDUC.AR LAB CHACO</h4>
                         <p>Sistema de turnos, recorrido virtual<br />e información institucional</p>
-                        <button onclick="location.href='/frontend/dist/turnos.html'">MAS INFORMACION</button>
+                        <button onclick="location.href='nosotros.html'">MAS INFORMACION</button>
                 </div>
                     <div class="image-section">
                         <img src="../img/Hero_Section_img1.png" alt="Image 1" />
@@ -190,7 +186,7 @@ function loadTalleres() {
                             <h4>${entrada.titulo}</h4>
                             <p><strong>Fecha :</strong> ${fechaFormateada}</p>
                             <p>${entrada.descripcion}</p>
-                            <button onclick="location.href='/frontend/dist/turnos.html'">MAS INFORMACION</button>
+                            <button onclick="location.href='/frontend/dist/turnos.html'">Reservar Turnos</button>
                         </div>
                         <div class="image-section">
                             <img src="${imagenSrc}" alt="${entrada.titulo}">

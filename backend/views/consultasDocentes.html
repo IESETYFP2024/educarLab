@@ -188,9 +188,6 @@
         data.forEach(alumno => {
             const row = document.createElement('tr');
             const columns = ['id', 'nombre_docente', 'escuela', 'dni', 'email', 'telefono', 'taller_titulo', 'taller_fecha', 'estado'];
-<<<<<<< HEAD
-            row.innerHTML = columns.map(col => `<td>${alumno[col]}</td>`).join('');
-=======
             row.innerHTML = columns.map(col => {
             let value = alumno[col];
             
@@ -201,7 +198,6 @@
             
             return `<td>${value}</td>`;
         }).join('');
->>>>>>> 5bb75ed690e2908f2b48a8c55408251115b8f3e2
 
             // Agregar botón de cancelar
             const actionsCell = document.createElement('td');
