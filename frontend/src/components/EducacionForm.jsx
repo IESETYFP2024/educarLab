@@ -38,7 +38,7 @@ const EducacionForm = () => {
     //window.open("https://drive.google.com/u/1/uc?id=1kRPn2BSMYBTP4L4YOMi-SRUSlx5TRaD4&export=download", "_blank")
     const handleDescarga = ()=>{
       const link = document.createElement("a");
-      link.href = "/public/AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES- ConectarLAB Chaco.docx";
+      link.href = "https://drive.google.com/u/1/uc?id=1MTNp59_E29k999t6QltyLuIQoRTBe_TP&export=download"; //enlace vinculado al documento en el drive de conectarLAB
       link.download = 'AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES';
       link.click();
       setDescargaWord(true)
@@ -358,7 +358,7 @@ const EducacionForm = () => {
               required
               style={{backgroundColor: '#8D5CF6'}}
               onClick={()=>{
-                window.open('/public/PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf', '_blank');
+                window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing'); //enlace vinculado al documento del drive conectarLAB
               }}
               >
               Ver Condiciones 

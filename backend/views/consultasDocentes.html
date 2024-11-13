@@ -135,7 +135,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre Docente</th>
-                    <th>Escuela</th>
+                    <th>Profesión</th>
                     <th>DNI</th>
                     <th>Email</th>
                     <th>Teléfono</th>
@@ -187,7 +187,7 @@
         }
         data.forEach(alumno => {
             const row = document.createElement('tr');
-            const columns = ['id', 'nombre_docente', 'escuela', 'dni', 'email', 'telefono', 'taller_titulo', 'taller_fecha', 'estado'];
+            const columns = ['id', 'nombre_docente', 'profesion', 'dni', 'email', 'telefono', 'taller_titulo', 'taller_fecha', 'estado'];
             row.innerHTML = columns.map(col => {
             let value = alumno[col];
             

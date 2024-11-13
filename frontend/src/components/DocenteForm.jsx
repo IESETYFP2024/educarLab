@@ -17,7 +17,7 @@ const DocenteForm = ({ talleres }) => {
   // Estado para manejar los datos del formulario
   const [formData, setFormData] = useState({
     nombreApellido: '',
-    escuela: '',
+    profesion: '',
     dni: '',
     email: '',
     telefono: '',
@@ -94,7 +94,7 @@ const DocenteForm = ({ talleres }) => {
       // Limpia los campos del formulario después del envío exitoso
       setFormData({
         nombreApellido: '',
-        escuela: '',
+        profesion: '',
         dni: '',
         email: '',
         telefono: '',
@@ -202,9 +202,9 @@ const DocenteForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Escuela"
-            name="escuela"
-            value={formData.escuela}
+            label="Profesión"
+            name="profesion"
+            value={formData.profesion}
             onChange={handleChange}
             required
           />
