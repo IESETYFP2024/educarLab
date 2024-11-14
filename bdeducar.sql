@@ -3083,12 +3083,15 @@ INSERT INTO `bdcue` (`id_cue`, `nombre_escuela`, `localidad`) VALUES
 -- Volcando estructura para tabla conectarlab.comentarios
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL DEFAULT '',
-  `mensaje` varchar(250) NOT NULL DEFAULT '',
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `description` varchar(250) NOT NULL DEFAULT '',
+  `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id_comentario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla conectarlab.comentarios: ~0 rows (aproximadamente)
+INSERT INTO `comentarios` (`id_comentario`, `name`, `description`, `created_at`) VALUES
+	(1, 'Juan Ramirez ', '¡Una página excelente, fácil de navegar y con contenido claro y útil!', NULL);
 
 -- Volcando estructura para tabla conectarlab.escuelas
 CREATE TABLE IF NOT EXISTS `escuelas` (
@@ -3108,7 +3111,7 @@ CREATE TABLE IF NOT EXISTS `escuelas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.escuelas: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.escuelas: ~13 rows (aproximadamente)
 INSERT INTO `escuelas` (`id`, `nombre_escuela`, `localidad_escuela`, `nombre_director`, `grado_escuela`, `turno`, `cantidad_alumnos`, `telefono`, `email`, `fecha`, `horario`, `cue`, `estado`) VALUES
 	(33, 'E.E.P. Nº 50 - MARCIANO LUIS OJEDA', 'RESISTENCIA', 'awefawef', 'awefawefawef', 'Mañana', 22, '3243242342', 'waefawefaw@gmail.com', '2024-10-18', 'Mañana 1', 220000200, 'CANCELADO'),
 	(34, 'E.P.A Nº 14 - RAMON DE LAS MERCEDES TISSERA', 'RESISTENCIA', 'waefwaef', 'waefawef', 'Tarde', 24, '2342342342', 'wadawdwad@gmail.com', '2024-10-18', 'Mañana 2', 220000501, 'CANCELADO'),
@@ -3141,7 +3144,7 @@ CREATE TABLE IF NOT EXISTS `inscripciones_comunidad` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.inscripciones_comunidad: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.inscripciones_comunidad: ~5 rows (aproximadamente)
 INSERT INTO `inscripciones_comunidad` (`id`, `nombre_alumno`, `edad`, `fecha_nacimiento`, `nombre_tutor`, `telefono_tutor`, `email`, `taller_titulo`, `taller_fecha`, `estado`, `taller_id`) VALUES
 	(10, 'wefawef', 12, '2024-11-15', 'weafawef', '2342342', 'waefawfawf@gmail.com', 'Robotica oijwadoiawjdiowaoi', '2024-11-21', 'ACTIVADO', 6),
 	(11, 'awefwaef', 13, '2024-11-14', 'awefwaef', 'awefwaefaw', 'maiwodmaiodwmoi@gmail.com', 'dwadawdaw', '2024-11-07', 'ACTIVADO', 3),
@@ -3165,7 +3168,7 @@ CREATE TABLE IF NOT EXISTS `inscripciones_docente` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.inscripciones_docente: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.inscripciones_docente: ~0 rows (aproximadamente)
 INSERT INTO `inscripciones_docente` (`id`, `nombre_docente`, `profesion`, `dni`, `email`, `telefono`, `taller_titulo`, `taller_fecha`, `estado`, `taller_id`) VALUES
 	(9, 'lucas rafaul', 'Profesor ', 45250619, 'awefawef@gmail.com', '324243242', 'Capacitacion para docentes', '2024-11-28', 'ACTIVADO', 5);
 
@@ -3194,21 +3197,23 @@ CREATE TABLE IF NOT EXISTS `talleres_docentes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.talleres_docentes: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.talleres_docentes: ~0 rows (aproximadamente)
 INSERT INTO `talleres_docentes` (`id`, `titulo`, `imagen`, `fecha`, `descripcion`) VALUES
 	(5, 'Capacitacion para docentes', 'https://lh3.googleusercontent.com/d/1GfSi1HmuNcejmQMACq-DOIDzTa3dc_Nj', '2024-11-28', 'awdawdawd');
 
 -- Volcando estructura para tabla conectarlab.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(2) NOT NULL,
+  `id` int(2) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL DEFAULT '',
   `role` enum('admin','user') NOT NULL DEFAULT 'admin',
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.users: ~1 rows (aproximadamente)
+INSERT INTO `users` (`id`, `email`, `password`, `role`, `created`) VALUES
+	(1, 'lucarafaul@gmail.com', '$2b$10$8/NDqaJg9hWoI/.bMZ9ka.L1tLBnJuvpUhq.OzlH5uHljmWjvGlt2', 'admin', '2024-11-14 13:43:09');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
