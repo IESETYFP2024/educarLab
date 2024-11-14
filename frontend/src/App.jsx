@@ -127,7 +127,7 @@ function App() {
                   value={['Taller Docente', 'Taller Comunidad'].includes(formActual) ? formActual : ''}
                   displayEmpty
                   onChange={handleComunidadChange}
-                  renderValue={(selected) => selected || "Talleres Abiertos "}
+                  renderValue={(selected) => selected || "TALLERES ABIERTOS "}
                   style={{backgroundColor: '#8D5CF6', color: 'white'}}
                 >
                   <MenuItem value="" disabled>Talleres Abiertos </MenuItem>

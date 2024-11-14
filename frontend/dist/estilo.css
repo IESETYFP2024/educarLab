@@ -192,8 +192,8 @@ img, svg {
 }
 
 .team-member img {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 350px;
     border-radius: 8px;
 
 }

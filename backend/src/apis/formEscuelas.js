@@ -65,7 +65,7 @@ async function GetHorarios() {
 
 export async function getHorariosOcupados(fechaVisita){
     try{
-        const [rows] = await db.execute("SELECT horario FROM escuelas WHERE fecha = ? ", [fechaVisita]);
+        const [rows] = await db.execute("SELECT horario FROM escuelas WHERE fecha = ? AND (estado != 'CANCELADO' OR estado IS NULL)", [fechaVisita]);
         return rows.map(row => row.horario)
     }
     catch(error){
@@ -76,7 +76,7 @@ export async function getHorariosOcupados(fechaVisita){
 
 export async function getFechasOcupadas() {
     try {
-        const [rows] = await db.execute("SELECT fecha FROM escuelas GROUP BY fecha HAVING COUNT(DISTINCT horario) >=4")
+        const [rows] = await db.execute("SELECT fecha FROM escuelas WHERE (estado != 'CANCELADO' OR estado IS NULL) GROUP BY fecha HAVING COUNT(DISTINCT horario) >= 4")
         return rows.map(row => row.fecha)
     } catch(error) {
         console.error('Error al cargar las fechas sin horarios: ', error);

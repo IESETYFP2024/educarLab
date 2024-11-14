@@ -82,7 +82,7 @@ const Calendario = ({ open, onClose, onDateClick, selectedDate }) => {
     return (
         // Diálogo que muestra el calendario
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Seleccione una Fecha</DialogTitle>
+            <DialogTitle>Seleccione una fecha</DialogTitle>
             <DialogContent>
                 {/* Componente de calendario con configuraciones y eventos */}
                 <Calendar 

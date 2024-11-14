@@ -79,7 +79,7 @@
 <section id="barradenavegacion">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="http://localhost:5173/EducarLab.html">
                 <img class="logo" src="images/logo.png" alt="EducarLAB" height="30" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre Docente</th>
-                    <th>Escuela</th>
+                    <th>Profesión</th>
                     <th>DNI</th>
                     <th>Email</th>
                     <th>Teléfono</th>
@@ -187,7 +187,7 @@
         }
         data.forEach(alumno => {
             const row = document.createElement('tr');
-            const columns = ['id', 'nombre_docente', 'escuela', 'dni', 'email', 'telefono', 'taller_titulo', 'taller_fecha', 'estado'];
+            const columns = ['id', 'nombre_docente', 'profesion', 'dni', 'email', 'telefono', 'taller_titulo', 'taller_fecha', 'estado'];
             row.innerHTML = columns.map(col => {
             let value = alumno[col];
             

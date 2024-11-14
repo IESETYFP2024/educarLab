@@ -46,7 +46,7 @@ const Horario = ({ open, onClose, onHorarioChange, horariosOcupados }) => {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Seleccione un Horario</DialogTitle>
+            <DialogTitle>Seleccione un horario</DialogTitle>
             <DialogContent>
             {horariosDisponibles.length > 0 ? (
                     <>

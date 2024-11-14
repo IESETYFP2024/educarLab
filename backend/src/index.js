@@ -11,14 +11,15 @@ import path from 'path';
 import { fileURLToPath } from 'url'; //
 import moment from 'moment'; // Para formato de fechas 
 import { Escuela, Horarios, PostTurno, getHorariosOcupados, getFechasOcupadas, getCue } from './apis/formEscuelas.js';
-import { PostTurnoComunidad, getComunidadData } from './apis/formComunidad.js';
-import {  PostTurnoDocente, getDocenteData } from './apis/formDocente.js';
+import { PostTurnoComunidad, getComunidadData,CheckCapacidadTallerComunidad } from './apis/formComunidad.js';
+import { PostTurnoDocente, getDocenteData,CheckCapacidadTallerDocente } from './apis/formDocente.js';
 import users, { verifyToken, verifyAdmin } from '../Routes/Users.js';
 import DB from './db/conexion.js';
 
 
 // Configuración de la aplicación Express
 const app = express()
+const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -207,8 +208,8 @@ app.get('/comunidad_data', async (req, res) => {
       const data = await getComunidadData();
       res.json(data);
   } catch (error) {
-      console.error('Error fetching comunidad data:', error);
-      res.status(500).json({ error: "Error fetching comunidad data" });
+      console.error('Error al traer la data para los talleres comunidad :', error);
+      res.status(500).json({ error: "Error al traer la data para los talleres comunidad" });
   }
 });
 
@@ -218,8 +219,8 @@ app.get('/docente_data', async (req, res) => {
       const data = await getDocenteData();
       res.json(data);
   } catch (error) {
-      console.error('Error fetching docente data:', error);
-      res.status(500).json({ error: "Error fetching docente data" });
+      console.error('Error al traer la data para los talleres docentes:', error);
+      res.status(500).json({ error: "Error al traer la data para los talleres docentes" });
   }
 });
 
@@ -228,8 +229,8 @@ app.get('/api/cue', async (req, res) => {
       const cueData = await getCue();
       res.json(cueData);
   } catch (error) {
-      console.error('Error fetching CUE data:', error);
-      res.status(500).json({ error: 'Error fetching CUE data' });
+      console.error('Error al traer la data para el CUE:', error);
+      res.status(500).json({ error: 'Error al traer la data para el CUE' });
   }
 });
 
@@ -607,6 +608,31 @@ app.get('/inscripciones_docente', async (req, res) => {
   } catch (error) {
       console.error('Error al consultar la base de datos:', error);
       res.status(500).json({ message: 'Error interno del servidor' });
+  }
+});
+
+// Ruta para ver la capacidad de estudiantes en los talleres abiertos
+app.get('/capacidad-taller-comunidad/:tallerId', async (req, res) => {
+  try {
+      const data= await CheckCapacidadTallerComunidad(req.params.tallerId);
+      res.json(data);
+  } catch (error) {
+      res.status(400).json({ 
+          success: false, 
+          message: error.message 
+      });
+  }
+});
+
+app.get('/capacidad-taller-docente/:tallerId', async (req, res) => {
+  try {
+      const data = await CheckCapacidadTallerDocente(req.params.tallerId);
+      res.json(data);
+  } catch (error) {
+      res.status(400).json({ 
+          success: false, 
+          message: error.message 
+      });
   }
 });
 
