@@ -192,7 +192,7 @@ const EducacionForm = () => {
     };
 
     return (
-        <Box component="form" onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { mb: 2 } }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { mb: 2 }, fontFamily: 'Rubik' }}>
           <Grid container spacing={2}>
             <Grid item xs={12} mt={2}>
               <Autocomplete
@@ -215,7 +215,7 @@ const EducacionForm = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Nombre de la Escuela"
+                label="Nombre de la escuela"
                 variant="outlined"
                 fullWidth
                 name="nombreEscuela"
@@ -227,7 +227,7 @@ const EducacionForm = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Localidad de la Escuela"
+                label="Localidad de la escuela"
                 variant="outlined"
                 fullWidth
                 name="localidadEscuela"
@@ -239,7 +239,7 @@ const EducacionForm = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Nombre del Director"
+                label="Nombre del director"
                 variant="outlined"
                 fullWidth
                 name="nombreDirector"
@@ -277,7 +277,7 @@ const EducacionForm = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Cantidad de Alumnos"
+                label="Cantidad de alumnos"
                 variant="outlined"
                 fullWidth
                 name="cantAlumnos"
@@ -324,7 +324,7 @@ const EducacionForm = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField 
-                label="Fecha de la Visita"
+                label="Fecha de la visita"
                 variant="outlined"
                 fullWidth
                 name="fechaVisita"
@@ -337,7 +337,7 @@ const EducacionForm = () => {
             {mostrarHorarioInput && (
               <Grid item xs={12} sm={6}>
                 <TextField 
-                  label="Horario Seleccionado"
+                  label="Horario seleccionado"
                   variant="outlined"
                   fullWidth
                   name="horario"
@@ -373,7 +373,7 @@ const EducacionForm = () => {
               variant="contained"
               style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
             >
-              Descargar Formulario <DownloadIcon />
+              Descargar formulario <DownloadIcon />
           </Button>
             </Grid>
 

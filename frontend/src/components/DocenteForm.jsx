@@ -35,16 +35,16 @@ const DocenteForm = ({ talleres }) => {
     }
   };
 
-  // Update useEffect to fetch capacity when taller changes
+  // // se actualiza el useEffect cada vez que el taller actual cambia para saber los cupos disponibles
   useEffect(() => {
     if (tallerActual && tallerActual.id) {
       fetchCuposDisponibles(tallerActual.id);
     }
-  }, [tallerActual]); // This will run whenever tallerActual changes
+  }, [tallerActual]); // el useEffect toma efecto siempre que tallerActual cambie
 
   const handleDescarga = ()=>{
     const link = document.createElement("a");
-    link.href = "/public/AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES- ConectarLAB Chaco.docx";
+    link.href = "https://drive.google.com/u/1/uc?id=1MTNp59_E29k999t6QltyLuIQoRTBe_TP&export=download";
     link.download = 'AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES';
     link.click();
     setDescargaWord(true)
@@ -73,12 +73,12 @@ const DocenteForm = ({ talleres }) => {
       return;
     }
     try {
-
+      //llamada a la api para saber el numero de cupos para el taller actual
       const capacidadResponse = await axios.get(`http://localhost:3000/capacidad-taller-docente/${tallerActual.id}`);
-      // Enviar los datos del formulario junto con la información del taller actual al backend
+      //si los turnos disponibles para el taller actual es mayor 0 recien se envian los datos
       if (capacidadResponse.data.turnosDisponibles > 0) {
         console.log(`los turnos disponibles del taller ${tallerActual.titulo} con id:  ${tallerActual.id} es de ${capacidadResponse.data.turnosDisponibles}`)
-        // Proceed with inscription
+        // Enviar los datos del formulario junto con la información del taller actual al backend
         await axios.post("http://localhost:3000/post/docente", {
           ...formData, 
           tallerTitulo: tallerActual.titulo, // Incluye título y fecha del taller actual
@@ -101,8 +101,8 @@ const DocenteForm = ({ talleres }) => {
         estado: 'ACTIVADO',
       });
     } catch (error) {
-      console.error('Error al enviar el formulario', error); // Muestra el error en consola
-      alert('Error al cargar'); // Muestra un mensaje de error
+      console.error('Error al enviar el formulario', error); 
+      alert('Error al cargar'); 
     }
   };
 
@@ -154,7 +154,7 @@ const DocenteForm = ({ talleres }) => {
           />
         )}
 
-      {/* Add Turnos Disponibles display */}
+      {/* Display de los turnos disponibles */}
       <Typography 
           variant="subtitle1" 
           sx={{ 
@@ -168,7 +168,7 @@ const DocenteForm = ({ talleres }) => {
         >
         {cuposDisponibles !== null ? (
         cuposDisponibles > 0 ? 
-        `Cupos Disponibles: ${cuposDisponibles}` : 
+        `Cupos disponibles: ${cuposDisponibles}` : 
         'Taller completo'
         ) : (
             'Cargando disponibilidad...'
@@ -192,7 +192,7 @@ const DocenteForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Nombre y Apellido"
+            label="Nombre y apellido"
             name="nombreApellido"
             value={formData.nombreApellido}
             onChange={handleChange}
@@ -223,7 +223,7 @@ const DocenteForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Correo Electrónico"
+            label="Correo electrónico"
             name="email"
             type="email"
             value={formData.email}
@@ -234,7 +234,7 @@ const DocenteForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Número de Teléfono"
+            label="Número de teléfono"
             name="telefono"
             type="tel"
             value={formData.telefono}
@@ -253,10 +253,10 @@ const DocenteForm = ({ talleres }) => {
             required
             style={{backgroundColor: '#8D5CF6'}}
             onClick={()=>{
-              window.open('/public/PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf', '_blank');
+              window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
             }}
             >
-            Ver Condiciones 
+            Ver condiciones 
           </Button>
       </Grid>
       <Grid container alignItems="center" sx={{mt:1}}>
@@ -268,7 +268,7 @@ const DocenteForm = ({ talleres }) => {
             variant="contained"
             style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
           >
-            Descargar Formulario <DownloadIcon />
+            Descargar formulario <DownloadIcon />
         </Button>
       </Grid>
 

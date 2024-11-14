@@ -25,12 +25,12 @@ const ComunidadForm = ({ talleres }) => {
     }
   };
 
-  // Update useEffect to fetch capacity when taller changes
+  // se actualiza el useEffect cada vez que el taller actual cambia para saber los cupos disponibles
   useEffect(() => {
     if (tallerActual && tallerActual.id) {
       fetchCuposDisponibles(tallerActual.id);
     }
-  }, [tallerActual]); // This will run whenever tallerActual changes
+  }, [tallerActual]); // el useEffect toma efecto siempre que tallerActual cambie
   
   // Estado para los datos del formulario
   const [formData, setFormData] = useState({
@@ -46,7 +46,7 @@ const ComunidadForm = ({ talleres }) => {
 
   const handleDescarga = ()=>{
     const link = document.createElement("a");
-    link.href = "/public/AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES- ConectarLAB Chaco.docx";
+    link.href = "https://drive.google.com/u/1/uc?id=1MTNp59_E29k999t6QltyLuIQoRTBe_TP&export=download";
     link.download = 'AUTORIZACION DE USO Y CESIÓN DE IMAGEN Y VOZ DE MENORES';
     link.click();
     setDescargaWord(true)
@@ -76,18 +76,18 @@ const ComunidadForm = ({ talleres }) => {
     }
 
     try {
+      //llamada a la api para saber el numero de cupos para el taller actual
       const capacidadResponse = await axios.get(`http://localhost:3000/capacidad-taller-comunidad/${tallerActual.id}`);
-
+      //si los turnos disponibles para el taller actual es mayor 0 recien se envian los datos
       if (capacidadResponse.data.turnosDisponibles > 0) {
         console.log(`los turnos disponibles del taller ${tallerActual.titulo} con id:  ${tallerActual.id} es de ${capacidadResponse.data.turnosDisponibles}`)
-        // Proceed with inscription
+
         await axios.post("http://localhost:3000/post/comunidad", {
           ...formData, 
           tallerTitulo: tallerActual.titulo, // Incluye título y fecha del taller actual
           tallerFecha: formatDate(tallerActual.fecha),
           tallerId: tallerActual.id,
         });
-        // Show success message
       } else {
         alert('Lo sentimos, este taller está lleno');
         return;
@@ -95,6 +95,7 @@ const ComunidadForm = ({ talleres }) => {
       alert('El turno se agregó'); // Mensaje de éxito
       console.log(`los turnos disponibles del taller ${tallerActual.titulo} con id:  ${tallerActual.id} es de ${capacidadResponse.data.turnosDisponibles}`)
       fetchCuposDisponibles(tallerActual.id)
+      // Resetea el formulario
       setFormData({
         nombreApellido: '',
         edad: '',
@@ -103,10 +104,10 @@ const ComunidadForm = ({ talleres }) => {
         telefono: '',
         email: '',
         estado: 'ACTIVADO',
-      }); // Resetea el formulario
+      }); 
     } catch (error) {
       console.error('Error al enviar el formulario', error);
-      alert('Error al cargar'); // Mensaje de error
+      alert('Error al cargar');
     }
   };
 
@@ -158,7 +159,7 @@ const ComunidadForm = ({ talleres }) => {
             }}
           />
         )}
-        {/* Add Turnos Disponibles display */}
+        {/* Display de los turnos disponibles */}
         <Typography 
           variant="subtitle1" 
           sx={{ 
@@ -169,7 +170,7 @@ const ComunidadForm = ({ talleres }) => {
         >
           {cuposDisponibles !== null ? (
             cuposDisponibles > 0 ? 
-              `Cupos Disponibles: ${cuposDisponibles}` : 
+              `Cupos disponibles: ${cuposDisponibles}` : 
               'Taller completo'
           ) : (
             'Cargando disponibilidad...'
@@ -194,7 +195,7 @@ const ComunidadForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Apellido y Nombre (del niño)"
+            label="Nombre y apellido (del niño/a)"
             name="nombreApellido"
             value={formData.nombreApellido}
             onChange={handleChange}
@@ -204,7 +205,7 @@ const ComunidadForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Edad (del niño)"
+            label="Edad (del niño/a)"
             name="edad"
             type="number"
             value={formData.edad}
@@ -215,7 +216,7 @@ const ComunidadForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Fecha de Nacimiento (del niño)"
+            label="Fecha de nacimiento (del niño/a)"
             name="fechaNacimiento"
             type="date"
             InputLabelProps={{ shrink: true }}
@@ -227,7 +228,7 @@ const ComunidadForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Nombre y Apellido del Tutor"
+            label="Nombre y apellido del tutor"
             name="nombreApellidoTutor"
             value={formData.nombreApellidoTutor}
             onChange={handleChange}
@@ -237,7 +238,7 @@ const ComunidadForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Teléfono del Tutor"
+            label="Teléfono del tutor"
             name="telefono"
             type="tel"
             value={formData.telefono}
@@ -248,7 +249,7 @@ const ComunidadForm = ({ talleres }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Correo Electrónico del Tutor"
+            label="Correo electrónico del tutor"
             name="email"
             type="email"
             value={formData.email}
@@ -267,10 +268,10 @@ const ComunidadForm = ({ talleres }) => {
               required
               style={{backgroundColor: '#8D5CF6'}}
               onClick={()=>{
-                window.open('/public/PAUTAS GENERALES para USO de INSTALACIONES Y RECURSOS ConectarLAB Chaco (MODIF.).docx.pdf', '_blank');
+                window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
               }}
               >
-              Ver Condiciones 
+              Ver condiciones 
               </Button>
             </Grid>
             <Grid container alignItems="center" sx={{mt:1}}>
@@ -282,7 +283,7 @@ const ComunidadForm = ({ talleres }) => {
               variant="contained"
               style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
             >
-              Descargar Formulario <DownloadIcon />
+              Descargar formulario <DownloadIcon />
           </Button>
             </Grid>
       

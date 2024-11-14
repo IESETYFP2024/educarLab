@@ -3139,21 +3139,22 @@ CREATE TABLE IF NOT EXISTS `inscripciones_comunidad` (
   `estado` varchar(50) NOT NULL,
   `taller_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.inscripciones_comunidad: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.inscripciones_comunidad: ~6 rows (aproximadamente)
 INSERT INTO `inscripciones_comunidad` (`id`, `nombre_alumno`, `edad`, `fecha_nacimiento`, `nombre_tutor`, `telefono_tutor`, `email`, `taller_titulo`, `taller_fecha`, `estado`, `taller_id`) VALUES
 	(10, 'wefawef', 12, '2024-11-15', 'weafawef', '2342342', 'waefawfawf@gmail.com', 'Robotica oijwadoiawjdiowaoi', '2024-11-21', 'ACTIVADO', 6),
 	(11, 'awefwaef', 13, '2024-11-14', 'awefwaef', 'awefwaefaw', 'maiwodmaiodwmoi@gmail.com', 'dwadawdaw', '2024-11-07', 'ACTIVADO', 3),
 	(12, 'awefwaefaw', 12, '2024-11-20', 'awefwaef', '2131231', 'awefgawefawe@gmail.com', 'Robotica oijwadoiawjdiowaoi', '2024-11-21', 'ACTIVADO', 6),
 	(13, 'awefwaef', 23, '2024-11-06', 'awefwaef', '234234242', 'aewfawefwafe@gmail.com', 'taller para probar cupos', '2024-11-29', 'ACTIVADO', 7),
-	(14, 'wfeafewaf', 12, '2024-11-22', 'awefawefwaef', 'awefwaefawef', 'awefawewaef9ij@gmail.com', 'taller para probar cupos', '2024-11-29', 'ACTIVADO', 7);
+	(14, 'wfeafewaf', 12, '2024-11-22', 'awefawefwaef', 'awefwaefawef', 'awefawewaef9ij@gmail.com', 'taller para probar cupos', '2024-11-29', 'ACTIVADO', 7),
+	(15, 'awdawdaw', 12, '2012-06-14', 'awdawda', 'awdawdaw', 'wadawfawf@gmail.com', 'Taller de Ciencia', '2024-11-22', 'ACTIVADO', 9);
 
 -- Volcando estructura para tabla conectarlab.inscripciones_docente
 CREATE TABLE IF NOT EXISTS `inscripciones_docente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_docente` varchar(50) NOT NULL,
-  `escuela` varchar(50) NOT NULL,
+  `profesion` varchar(50) NOT NULL,
   `dni` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL,
@@ -3162,12 +3163,11 @@ CREATE TABLE IF NOT EXISTS `inscripciones_docente` (
   `estado` varchar(50) NOT NULL,
   `taller_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.inscripciones_docente: ~2 rows (aproximadamente)
-INSERT INTO `inscripciones_docente` (`id`, `nombre_docente`, `escuela`, `dni`, `email`, `telefono`, `taller_titulo`, `taller_fecha`, `estado`, `taller_id`) VALUES
-	(7, 'sdfsfsdf', 'eswfsefse', 345345353, 'awdawdawd@gmail.com', '23423424242', 'Capacitacion ciencias', '2024-11-22', 'ACTIVADO', 3),
-	(8, 'fghfghf', 'fghfghf', 32423424, 'awdawdawd@gmail.com', '23424242342', 'nuevo taller', '2024-11-29', 'ACTIVADO', 4);
+-- Volcando datos para la tabla conectarlab.inscripciones_docente: ~1 rows (aproximadamente)
+INSERT INTO `inscripciones_docente` (`id`, `nombre_docente`, `profesion`, `dni`, `email`, `telefono`, `taller_titulo`, `taller_fecha`, `estado`, `taller_id`) VALUES
+	(9, 'lucas rafaul', 'Profesor ', 45250619, 'awefawef@gmail.com', '324243242', 'Capacitacion para docentes', '2024-11-28', 'ACTIVADO', 5);
 
 -- Volcando estructura para tabla conectarlab.talleres_comunidad
 CREATE TABLE IF NOT EXISTS `talleres_comunidad` (
@@ -3177,13 +3177,12 @@ CREATE TABLE IF NOT EXISTS `talleres_comunidad` (
   `fecha` date NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla conectarlab.talleres_comunidad: ~2 rows (aproximadamente)
 INSERT INTO `talleres_comunidad` (`id`, `titulo`, `imagen`, `fecha`, `descripcion`) VALUES
-	(3, 'dwadawdaw', 'https://lh3.googleusercontent.com/d/1GfSi1HmuNcejmQMACq-DOIDzTa3dc_Nj', '2024-11-07', 'weafawefawef'),
-	(6, 'Robotica oijwadoiawjdiowaoi', 'https://lh3.googleusercontent.com/d/1GfSi1HmuNcejmQMACq-DOIDzTa3dc_Nj', '2024-11-21', 'asdasda'),
-	(7, 'taller para probar cupos', 'https://lh3.googleusercontent.com/d/12V1IacS6DDXOxQXD0Y53TCzaD9Jr4AEX', '2024-11-29', 'asdasdasd');
+	(8, 'Taller de Robotica', 'https://lh3.googleusercontent.com/d/13Ia0NIaGdI_IjUyEZuoVzN6bJ9qoD7fA', '2024-11-23', 'awdawdaw'),
+	(9, 'Taller de Ciencia', 'https://lh3.googleusercontent.com/d/1PfJ9YB5KG1Tu3QqR2bjJJNGBWYLLdMNY', '2024-11-22', 'asddawdawd');
 
 -- Volcando estructura para tabla conectarlab.talleres_docentes
 CREATE TABLE IF NOT EXISTS `talleres_docentes` (
@@ -3195,9 +3194,8 @@ CREATE TABLE IF NOT EXISTS `talleres_docentes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla conectarlab.talleres_docentes: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla conectarlab.talleres_docentes: ~1 rows (aproximadamente)
 INSERT INTO `talleres_docentes` (`id`, `titulo`, `imagen`, `fecha`, `descripcion`) VALUES
-	(4, 'nuevo taller', 'https://lh3.googleusercontent.com/d/1GfSi1HmuNcejmQMACq-DOIDzTa3dc_Nj', '2024-11-29', 'sadad'),
 	(5, 'Capacitacion para docentes', 'https://lh3.googleusercontent.com/d/1GfSi1HmuNcejmQMACq-DOIDzTa3dc_Nj', '2024-11-28', 'awdawdawd');
 
 -- Volcando estructura para tabla conectarlab.users
