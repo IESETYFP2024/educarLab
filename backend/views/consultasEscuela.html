@@ -6,11 +6,13 @@
     <title>Consulta de Escuelas</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kubic&display=swap" rel="stylesheet">
+
     <style>
         body {
             background-color: #252D4F;
             background-image: url("../public/fondo2.jpg");
-            font-family: Arial, sans-serif;
+            font-family: 'Kubic', sans-serif;
             color: white;
             margin: 0;
             padding-top: 60px; /* Añade espacio para la barra de navegación fija */
@@ -89,19 +91,19 @@
                             <a class="nav-link" href="consultasEscuela.html">Escuelas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="consultasComunidad.html">Inscripciones Comunidad</a>
+                            <a class="nav-link" href="consultasComunidad.html">Comunidad</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="consultasDocentes.html">Inscripciones Docentes</a>
+                            <a class="nav-link" href="consultasDocentes.html">Docentes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="adminComentarios.html">Comentarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cargatalleralumnos.html">Taller Comunidad</a>
+                            <a class="nav-link" href="cargatalleralumnos.html">Talleres estudiantes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cargaTallerdocentes.html">Taller Docente</a>
+                            <a class="nav-link" href="cargaTallerdocentes.html">Talleres docentes</a>
                         </li>
                     </ul>
                 </div>
@@ -110,7 +112,7 @@
     </section>
 
     <div class="container">
-        <h1>Lista de Escuelas</h1>
+        <h1>Escuelas asignadas</h1>
 
         <!-- Fila con los campos de búsqueda -->
         <div class="row mb-3">
@@ -144,6 +146,14 @@
                 </div>
             </div>
         </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12 text-end">
+                <button class="btn btn-success" onclick="downloadExcel()">Descargar Excel</button>
+            </div>
+        </div>
+        
+        
 
         <!-- Tabla de resultados -->
         <div class="table-container">
@@ -223,6 +233,47 @@
     });
 }
 
+
+function downloadExcel() {
+        // Obtener los datos filtrados
+        const data = schools.filter(escuela => {
+            const searchInput = document.getElementById('nombreInput').value.toLowerCase();
+            const mesInput = document.getElementById('mesInput').value;
+            const anioInput = document.getElementById('anioInput').value;
+
+            const matchesName = escuela.nombre_escuela.toLowerCase().includes(searchInput);
+            const matchesMonth = !mesInput || escuela.fecha.slice(5, 7) === mesInput;
+            const matchesYear = !anioInput || escuela.fecha.slice(0, 4) === anioInput;
+
+            return matchesName && matchesMonth && matchesYear;
+        });
+
+        // Convertir los datos a formato que XLSX pueda procesar
+        const formattedData = data.map(escuela => ({
+            'ID': escuela.id,
+            'Nombre Escuela': escuela.nombre_escuela,
+            'Localidad': escuela.localidad_escuela,
+            'Nombre Director': escuela.nombre_director,
+            'Grado Escuela': escuela.grado_escuela,
+            'Turno': escuela.turno,
+            'Cantidad Alumnos': escuela.cantidad_alumnos,
+            'Teléfono': escuela.telefono,
+            'Email': escuela.email,
+            'Fecha': new Date(escuela.fecha).toISOString().split('T')[0], // Formato YYYY-MM-DD
+            'Horario': escuela.horario,
+            'CUE': escuela.cue,
+            'Estado': escuela.estado
+        }));
+
+        // Crear el archivo Excel
+        const ws = XLSX.utils.json_to_sheet(formattedData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Escuelas');
+
+        // Descargar el archivo Excel
+        XLSX.writeFile(wb, 'escuelas.xlsx');
+    }
+
         function filterSchools() {
             const searchInput = document.getElementById('nombreInput').value.toLowerCase();
             const mesInput = document.getElementById('mesInput').value;
@@ -259,7 +310,8 @@
 
         loadAllSchools();
     </script>
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS y excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

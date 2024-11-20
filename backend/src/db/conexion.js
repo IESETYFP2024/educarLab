@@ -7,7 +7,7 @@ try {
       host: 'localhost',
       user: 'root',
       password: '1234',
-      database: 'bdeducar',
+      database: 'bdeducarn',
     });
 } catch (err) {
     console.log(err);
