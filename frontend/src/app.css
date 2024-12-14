@@ -6,12 +6,14 @@ a:hover{
 :root {
   --primary-color: #0d5aad;
   --secondary-color: #8D5CF6;
+  --third-color: #ac86fd;
   --white-color: #FFFFFF;
   --text-color: #FFFFFF;
 }
 
 body {
-  background-image: url("/fondo.jpg");
+  /*background-image: url("/fondo.jpg");*/
+  background-color: rgb(245, 245, 245);
   background-size: fixed;
   background-attachment: fixed;
   font-family: 'Rubik', sans-serif;

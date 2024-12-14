@@ -1,7 +1,7 @@
 import db from "../db/conexion.js";
 import transporter from '../nodemailerConfig.js'; // Importamos Nodemailer
 
-// Función para agregar una reserva y enviar correo
+// Función para enviar un correo de confirmación de reserva
 export async function PostTurno(request, response) {
     const data = request.body;
     console.log(data);
@@ -23,7 +23,7 @@ export async function PostTurno(request, response) {
 
 }
 
-// Función para enviar un correo de confirmación de reserva
+// Función para agregar una reserva y enviar correo
 async function enviarCorreoConfirmacion(email, nombreEscuela, fechaVisita, horario) {
     const mailOptions = {
         from: 'rodrigo.gomez.pinatti@gmail.com', // Cambia por tu correo

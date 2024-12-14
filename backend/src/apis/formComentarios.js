@@ -30,11 +30,13 @@ router.post('/comentarios', async (req, res) => {
 });
 
 // Eliminar un comentario (Solo admins)
-router.delete('/comentarios/:id', verifyAdmin, async (req, res) => {
-    const { id } = req.params;
+router.delete('/comentarios/:id_comentario', verifyAdmin, async (req, res) => {
+    
+    const { id_comentario } = req.params;
+    console.log('ID recibido:', id_comentario); // Imprime el ID recibido
 
     try {
-        await pool.query('DELETE FROM comentarios WHERE id = ?', [id]);
+        await pool.query('DELETE FROM comentarios WHERE id_comentario = ?', [id_comentario]); //cambio de id a id_comentario(momentaneo)
         res.json({ message: 'Comentario eliminado correctamente' });
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el comentario' });

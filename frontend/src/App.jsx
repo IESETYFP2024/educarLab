@@ -85,7 +85,7 @@ function App() {
           variant="contained"
           color="secondary"
           onClick={handleReturnHome}
-          sx={{ minWidth: 'unset', width: '100px', height: '50px', p: 0, fontWeight:'1000', backgroundColor:'#E7214E', color:'white'}}
+          sx={{ minWidth: 'unset', width: '100px', height: '50px', p: 0, fontWeight:'1000', backgroundColor:'#06213E', color:'white'}}
         >
           <HomeIcon style={{padding:'0px 0px 6px 0px'}}/>
           Inicio
@@ -115,9 +115,9 @@ function App() {
                 color="primary"
                 onClick={handleEducacionClick}
                 fullWidth
-                style={{backgroundColor: '#8D5CF6', height:'55px'}}
+                style={{backgroundColor: '#8D5CF6', height:'55px', textTransform: 'none'}}
               >
-                Visitas Escuelas
+                VISITAS ESCUELAS
               </Button>
             </Grid>
             <Grid item xs={12} sm={6} >
@@ -128,7 +128,21 @@ function App() {
                   displayEmpty
                   onChange={handleComunidadChange}
                   renderValue={(selected) => selected || "TALLERES ABIERTOS "}
-                  style={{backgroundColor: '#8D5CF6', color: 'white'}}
+                  style={{
+                    backgroundColor: '#ac86fd',
+                    color: 'white',
+                    height: '55px', // Matches Button height
+                    textAlign: 'center', // Centers the text
+                    fontWeight: 400, // Normal weight
+                    display: 'flex',
+                    alignItems: 'center', // Vertically centers the text
+                  }}
+                  inputProps={{
+                    style: {
+                      padding: 0, // Removes default padding
+                      textAlign: 'center', // Centers the placeholder
+                    },
+                  }}
                 >
                   <MenuItem value="" disabled>Talleres Abiertos </MenuItem>
                   <MenuItem value="Taller Docente">Talleres Docentes</MenuItem>

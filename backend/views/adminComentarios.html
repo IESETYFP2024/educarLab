@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
      <!-- Font Awesome CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Kubic&display=swap" rel="stylesheet">
+
     <style>
         body {
             background-color: #252D4F;
             background-image: url("../public/fondo2.jpg");
-            font-family: Arial, sans-serif;
+            font-family: 'Kubic', sans-serif;
             color: white;
             margin: 0;
             padding-top: 60px; /* Añade espacio para la barra de navegación fija */
@@ -100,11 +102,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="consultasEscuela.html">Escuelas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="consultasComunidad.html">Inscripciones Comunidad</a></li>
-                    <li class="nav-item"><a class="nav-link" href="consultasDocentes.html">Inscripciones Docentes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adminComentarios.html">Cargar Comentarios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cargaTalleralumnos.html">Taller Comunidad</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cargaTallerdocentes.html">Taller Docente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="consultasComunidad.html">Comunidad</a></li>
+                    <li class="nav-item"><a class="nav-link" href="consultasDocentes.html">Docentes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="adminComentarios.html">Comentarios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cargaTalleralumnos.html">Talleres estudiantes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cargaTallerdocentes.html">Talleres docentes</a></li>
                 </ul>
             </div>
         </div>
@@ -113,7 +115,7 @@
 
 <!-- Main Content -->
 <div class="container">
-    <h1>Administrar Comentarios</h1>
+    <h1>Carga de comentarios</h1>
 
     <!-- Formulario para cargar un comentario -->
     <section id="cargar-comentario" class="mb-4">
@@ -174,7 +176,7 @@ async function obtenerComentarios() {
                     <td>${comentario.name}</td>
                     <td>${comentario.description}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarComentario(${comentario.id})">Eliminar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarComentario(${comentario.id_comentario})">Eliminar</button>
                     </td>
                 `;
                 comentariosTabla.appendChild(fila);
@@ -223,7 +225,8 @@ document.getElementById('comentarioForm').addEventListener('submit', async (e) =
 });
 
 // Función para eliminar un comentario
-async function eliminarComentario(id) {
+async function eliminarComentario(id_comentario) {
+    
     const token = obtenerToken();
 
     if (!token) {
@@ -232,7 +235,7 @@ async function eliminarComentario(id) {
     }
 
     try {
-        const response = await fetch(`${apiUrl}/${id}`, {
+        const response = await fetch(`${apiUrl}/${id_comentario}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`, // Agregar el token en los headers
@@ -243,10 +246,10 @@ async function eliminarComentario(id) {
             alert('Comentario eliminado');
             obtenerComentarios(); // Actualizamos la lista de comentarios
         } else {
-            alert('Error al eliminar el comentario');
+            alert(`Error al eliminar el comentario: ${id_comentario}`);
         }
     } catch (error) {
-        console.error('Error al eliminar el comentario:', error);
+        console.error(`Error al eliminar el comentario: ${id_comentario}`, error);
     }
 }
 
