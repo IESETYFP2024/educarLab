@@ -131,16 +131,16 @@ function App() {
                   style={{
                     backgroundColor: '#ac86fd',
                     color: 'white',
-                    height: '55px', // Matches Button height
-                    textAlign: 'center', // Centers the text
-                    fontWeight: 400, // Normal weight
+                    height: '55px', 
+                    textAlign: 'center', 
+                    fontWeight: 400, 
                     display: 'flex',
-                    alignItems: 'center', // Vertically centers the text
+                    alignItems: 'center', 
                   }}
                   inputProps={{
                     style: {
-                      padding: 0, // Removes default padding
-                      textAlign: 'center', // Centers the placeholder
+                      padding: 0, 
+                      textAlign: 'center', 
                     },
                   }}
                 >

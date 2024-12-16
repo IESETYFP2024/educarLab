@@ -3,9 +3,9 @@ import transporter from '../nodemailerConfig.js'; // Importamos Nodemailer
 
 export async function CheckCapacidadTallerComunidad(tallerId) {
     try {
-        const CAPACIDAD_TOTAL = 50; // Define this as a constant at the top
+        const CAPACIDAD_TOTAL = 50; // Capacidad total para los cursos
 
-        // Count active inscriptions (not CANCELADO) for this taller
+        // Count para las inscripciones activas (sin estado CANCELADO) para el taller
         const [rows] = await db.execute(
             `SELECT COUNT(*) as count 
              FROM inscripciones_comunidad 

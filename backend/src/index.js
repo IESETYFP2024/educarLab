@@ -99,7 +99,7 @@ app.delete('/comentarios/:id', async (req, res) => {
   }
 
   try {
-    const [result] = await DB.query('DELETE FROM comentarios WHERE id = ?', [id]);
+    const [result] = await DB.query('DELETE FROM comentarios WHERE id_comentario = ?', [id]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Comentario no encontrado.' });
     }
