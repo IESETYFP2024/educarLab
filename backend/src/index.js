@@ -3,8 +3,6 @@
 import 'dotenv/config';
 
 import transporter from './nodemailerConfig.js';
-
-
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -15,6 +13,7 @@ import { PostTurnoComunidad, getComunidadData,CheckCapacidadTallerComunidad } fr
 import { PostTurnoDocente, getDocenteData,CheckCapacidadTallerDocente } from './apis/formDocente.js';
 import users, { verifyToken, verifyAdmin } from '../Routes/Users.js';
 import DB from './db/conexion.js';
+import cookieParser from 'cookie-parser';
 
 
 // Configuración de la aplicación Express
@@ -22,11 +21,14 @@ const app = express()
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const PORT = 3000
 
-// Configuración de la aplicación Express
+// Configuraciónes extra
 app.use(express.json());
 app.use(express.urlencoded({extended: true, }));
 app.use(cors())
+app.use(cookieParser());
+
 
 
 
@@ -35,11 +37,73 @@ app.use(express.static(path.join(__dirname, '..', 'views')));
 
 
 
-
 // Ruta raíz
-app.get('/', (req, res) => {
-    res.json({ message: "ok" });
+
+//intercambiar con /educarlab para que esta ruta sirva el educarLab.html
+app.get('/', verifyToken,(req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'consultasEscuela.html'));
 })
+
+
+app.get('/consultasComunidad', verifyToken, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'consultasComunidad.html'));
+});
+
+app.get('/consultasDocentes', verifyToken, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'consultasDocentes.html'));
+});
+
+// Ruta para cargarTalleralumnos.html
+app.get('/alumnos', verifyToken,(req, res) => {
+  res.sendFile(path.join(__dirname, '../views/cargaTalleralumnos.html'));
+});
+
+// Ruta para cargarTallerdocentes.html
+app.get('/docentes', verifyToken,(req, res) => {
+  res.sendFile(path.join(__dirname, '../views/cargaTallerdocentes.html'));
+});
+
+
+// Página de administración de comentarios (Solo para administradores)
+app.get('/adminComentarios', verifyToken, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'adminComentarios.html'));
+});
+
+//Servimos la página principal
+app.get('/educarlab', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../frontend/dist/EducarLab.html'));
+});
+
+// Ruta para la página de restablecimiento de contraseña
+app.get('/resetPassword', (req, res) => {
+  res.sendFile(path.join(__dirname,'..', 'views', 'resetPassword.html'));
+});
+
+// Ruta para la página de login
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));
+});
+
+// Ruta para la página de login
+app.get('/registro', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'register.html'));
+});
+
+app.get('/sendResetPasswordEmail', (req, res) => {
+  res.sendFile(path.join(__dirname,'..', 'views', 'requestPasswordReset.html'));
+});
+
+app.get('/listadoDeUsuarios', async function (req, res) {
+  try {
+    const [rows] = await DB.query('SELECT id, email, role, created FROM users'); // Adjust the selected fields as needed
+    res.status(200).json({ error: 0, data: rows });
+  } catch (err) {
+    console.error("Error fetching users:", err);
+    res.status(500).json({ error: 1, data: "Error fetching users" });
+  }
+});
+
+
 
 // Ruta para obtener datos de escuela
 app.get('/get', (req, res) => {
@@ -54,6 +118,17 @@ app.get('/get_horarios', (req, res) => {
 //Parte de Franco Godoy - Login y Comentarios
 //Router de usuarios
 app.use('/users', users);
+
+//
+app.get('/users/login', async (req,res) =>{
+  try {
+    const [rows] = await DB.query('SELECT * FROM users');
+    res.status(200).json(rows); 
+  } catch (err) {
+    console.error('Error al obtener los users:', err);
+    res.status(500).json({ message: 'Error al obtener los users.' });
+  }
+})
 
 
 // Ruta para obtener todos los comentarios
@@ -89,7 +164,7 @@ app.post('/comentarios', async (req, res) => {
 
 
 // Ruta para eliminar un comentario por ID
-app.delete('/comentarios/:id', async (req, res) => {
+app.delete('/comentarios/:id',  async (req, res) => {
   const { id } = req.params;
 
   // Verificación de autenticación
@@ -112,34 +187,6 @@ app.delete('/comentarios/:id', async (req, res) => {
 
 
 
-// Página de administración de comentarios (Solo para administradores)
-app.get('/adminComentarios', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'views', 'adminComentarios.html'));
-});
-
-//Servimos la página principal
-app.get('/educarlab', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../frontend/public/EducarLab.html'));
-});
-
-// Ruta para la página de restablecimiento de contraseña
-app.get('/resetPassword', (req, res) => {
-  res.sendFile(path.join(__dirname,'..', 'views', 'resetPassword.html'));
-});
-
-// Ruta para la página de login
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));
-});
-
-// Ruta para la página de login
-app.get('/createAdmin', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'views', 'register.html'));
-});
-
-app.get('/sendResetPasswordEmail', (req, res) => {
-  res.sendFile(path.join(__dirname,'..', 'views', 'requestPasswordReset.html'));
-});
 
 
 
@@ -243,17 +290,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Configurar el middleware estático correctamente
-app.use(express.static(path.join(__dirname, '../../frontend/public/vistasTaller')));
+//app.use(express.static(path.join(__dirname, '../../frontend/public/vistasTaller')));
 
 // Nueva ruta para servir ConectarLab.html
-app.get('/conectarlab', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/public/ConectarLab.html'));
-});
+//app.get('/conectarlab', (req, res) => {
+  //res.sendFile(path.join(__dirname, '../../frontend/public/ConectarLab.html'));
+//});
 
-// Ruta para cargarTalleralumnos.html
-app.get('/alumnos', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/cargaTalleralumnos.html'));
-});
+
+
+
 
 // API para obtener datos de talleres de alumnos
 app.get('/api/alumnos', async (req, res) => {
@@ -301,10 +347,7 @@ app.delete('/alumnos/delete/:id', async (req, res) => {
   }
 });
 
-// Ruta para cargarTallerdocentes.html
-app.get('/docentes', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/cargaTallerdocentes.html'));
-});
+
 
 // API para obtener datos de talleres de docentes
 app.get('/api/docentes', async (req, res) => {
@@ -377,6 +420,12 @@ app.get('/comunidadConsultas', (req, res) => {
 app.get('/docentesConsultas', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'views', 'docentesConsultas.html'));
 });
+
+
+
+
+
+
 // Ruta para obtener datos de comunidad
 app.get('/comunidad_data', async (req, res) => {
   try {
@@ -640,4 +689,6 @@ app.get('/capacidad-taller-docente/:tallerId', async (req, res) => {
 
 
 // Iniciar el servidor en el puerto 3000
-app.listen(3000)
+app.listen(PORT,()=>{
+  console.log(`El servidor esta corriendo en el puerto ${PORT}`)
+})

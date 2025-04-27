@@ -76,6 +76,27 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+  const welcomeMessageDiv = document.getElementById('welcome-message');
+
+  // Get admin data from local storage
+  const storedAdminData = localStorage.getItem('adminData');
+
+  if (storedAdminData) {
+    try {
+      const adminData = JSON.parse(storedAdminData);
+      const welcomeMessage = `Welcome, ${adminData.name}!`;
+      welcomeMessageDiv.textContent = welcomeMessage;
+    } catch (error) {
+      console.error('Error parsing admin data:', error);
+      welcomeMessageDiv.textContent = 'Error loading admin info.';
+    }
+  } else {
+    welcomeMessageDiv.textContent = 'Please log in.'; // Or redirect to login
+  }
+});
+    </script>
     <section id="barradenavegacion">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
@@ -88,22 +109,22 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="consultasEscuela.html">Escuelas</a>
+                            <a class="nav-link" href="/">Escuelas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="consultasComunidad.html">Comunidad</a>
+                            <a class="nav-link" href="/consultasComunidad">Comunidad</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="consultasDocentes.html">Docentes</a>
+                            <a class="nav-link" href="/consultasDocentes">Docentes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="adminComentarios.html">Comentarios</a>
+                            <a class="nav-link" href="/adminComentarios">Comentarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cargatalleralumnos.html">Talleres estudiantes</a>
+                            <a class="nav-link" href="/alumnos">Talleres estudiantes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cargaTallerdocentes.html">Talleres docentes</a>
+                            <a class="nav-link" href="/docentes">Talleres docentes</a>
                         </li>
                     </ul>
                 </div>

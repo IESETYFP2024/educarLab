@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="logo-container">
-        <a href="./public/ConectarLab.html"></a>
+        <a href="./public/EducarLab.html"></a>
         <img src="images/1080x1920 EDUCARLAB Chaco_Gris.png" alt="Logo" class="logo">
     </div>
 
@@ -49,9 +49,7 @@
                     if (response.ok) {
                         const { token } = await response.json();
                         console.log("Token recibido:", token); // Para depurar
-                        localStorage.setItem('authToken', token); // Guardar el token en localStorage
-                        console.log("Token guardado en localStorage:", localStorage.getItem('authToken')); // Para depurar
-                        window.location.href = '/consultasEscuela.html'; // Redirigir al dashboard
+                        window.location.href = '/'; // Redirigir al dashboard
                     } else {
                         const responseData = await response.json();
                         console.log("Respuesta del servidor:", responseData); // Para depurar

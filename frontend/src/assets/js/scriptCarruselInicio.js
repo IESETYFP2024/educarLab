@@ -161,7 +161,7 @@ function loadTalleres() {
                         <button onclick="location.href='nosotros.html'">MAS INFORMACION</button>
                 </div>
                     <div class="image-section">
-                        <img src="../img/Hero_Section_img1.png" alt="Image 1" />
+                         <img src='./img/Hero_Section_img1.png' alt="Image 1" />
                     </div>
                 </div>
                 `;

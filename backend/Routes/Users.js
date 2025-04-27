@@ -34,6 +34,7 @@ users.post('/createAdmin', async function(req, res) {
     "role": "admin"
   };
 
+
   try {
     const connection = await database; // Usa la conexión directamente
     await connection.query('INSERT INTO users SET ?', userData);
@@ -55,8 +56,17 @@ users.post('/login', async function(req, res) {
           const result = await bcrypt.compare(password, rows[0].password);
           if (result) {
               const payload = { id: rows[0].id, email: rows[0].email };
-              const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: 1440 }); // Token expira en 24 horas
+              const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h'}); // Token expira en 24 horas
+              res.cookie('token', token, {
+                httpOnly: true,
+                secure: false, // ponelo en true si usás HTTPS
+                sameSite: 'Lax',
+                maxAge: 3600000 // 1 hora
+              });
               res.status(200).json({ error: 0, token }); // Respuesta exitosa con token
+
+              //res.send({user, token})
+              console.log("Token generado:", token);
           } else {
               res.status(401).json({ error: 1, data: "El Email o la Contraseña no coinciden" }); // Cambiado a 401
           }
@@ -68,6 +78,8 @@ users.post('/login', async function(req, res) {
       res.status(500).json({ error: 1, data: "Error en el servidor interno" });
   }
 });
+
+
 
 // Endpoint POST '/sendResetPasswordEmail': Enviar el correo electrónico con el token
 users.post('/sendResetPasswordEmail', async function(req, res) {
@@ -136,56 +148,50 @@ users.post('/resetPassword', async function(req, res) {
 
 
 // Middleware para verificar el rol de administrador
-export function verifyAdmin(req, res, next) {
-  const token = req.headers['authorization']?.split(' ')[1]; // Extrae el token del encabezado Authorization
+export const verifyAdmin = (req, res, next) => {
+  const token = req.headers['authorization'];
 
   if (!token) {
-    return res.status(403).json({ message: 'No se proporcionó un token' });
+    console.log('No token provided');
+    return res.status(403).json({ error: 1, data: 'No token provided.' });
   }
 
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY); // Verifica el token
+  jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    if (err) {
+      console.log('Token verification failed:', err);
+      return res.status(401).json({ error: 1, data: 'Failed to authenticate token.' });
+    }
 
-    database.query('SELECT * FROM users WHERE id = ?', [decoded.id], (err, results) => {
-      if (err) {
-        return res.status(500).json({ message: 'Error al conectar a la base de datos' });
-      }
+    console.log('Decoded token:', decoded);
 
-      if (results.length === 0) {
-        return res.status(401).json({ message: 'Usuario no encontrado' });
-      }
+    if (decoded.role !== 'admin') {
+      console.log('Role check failed. Required: admin, Found:', decoded.role);
+      return res.status(403).json({ error: 1, data: 'Access denied. Admins only.' });
+    }
 
-      // Verifica si el usuario es un administrador
-      if (results[0].role !== 'admin') {
-        return res.status(403).json({ message: 'Acceso denegado, no es administrador' });
-      }
+    req.user = decoded;
+    next();
+  });
+};
 
-      req.user = results[0];
-      next();
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(401).json({ message: 'Token inválido' });
-  }
-}
 
 // Middleware para verificar la validez del token JWT en las solicitudes entrantes
 export function verifyToken(req, res, next) {
-  const token = req.headers['authorization']?.split(' ')[1]; // Extrae el token del encabezado Authorization
+  const token = req.cookies.token;
 
   if (!token) {
     return res.status(403).json({ message: 'No se proporcionó un token' });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY); // Verifica el token
-    req.user = decoded; // Almacena la información decodificada del token en req.user
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = decoded;
     next();
   } catch (error) {
-    console.error(error);
+    console.error('Error al verificar token:', error);
     return res.status(401).json({ message: 'Token inválido' });
   }
-};
+}
 
 
 // Exportar el router de usuarios

@@ -4,7 +4,7 @@ const pool = require('./db');  // Asegúrate de que apunte al archivo de conexi�
 const { verifyAdmin } = require('../Routes/Users/verifyAdmin');  // Middleware para verificar si el usuario es admin
 
 // Obtener todos los comentarios
-router.get('/comentarios', async (req, res) => {
+router.get('/comentarios', verifyAdmin,async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM comentarios');
         res.json(rows);
@@ -15,7 +15,7 @@ router.get('/comentarios', async (req, res) => {
 
 // Crear un nuevo comentario (Solo admins)
 // Comentar temporalmente la verificación de admin para probar
-router.post('/comentarios', async (req, res) => {
+router.post('/comentarios', verifyAdmin,async (req, res) => {
     const { name, description } = req.body;
     if (!name || !description) {
         return res.status(400).json({ message: 'Faltan campos requeridos' });
