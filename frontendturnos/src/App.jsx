@@ -203,10 +203,10 @@ function App() {
             <div className="row">
               <div className="col-md-12">
                 <div className="logo_container">
-                  <img src="./img/logos/Logo Chaco.png" alt="Logo Chaco" />
-                  <img src="./img/logos/Logo educar.png" alt="Logo Educar" />
-                  <img src="./img/logos/Logo Fontana.png" alt="Logo Fontana" />
-                  <img src="./img/logos/Logo Ministerio.png" alt="Logo Ministerio" />
+                  <img src="../img/logos/Logo Chaco.png" alt="Logo Chaco" />
+                  <img src="../img/logos/Logo educar.png" alt="Logo Educar" />
+                  <img src="../img/logos/Logo Fontana.png" alt="Logo Fontana" />
+                  <img src="../img/logos/Logo Ministerio.png" alt="Logo Ministerio" />
                 </div>
               </div>
             </div>
