@@ -47,13 +47,20 @@ export async function PostTurnoComunidad(request) {
 
 // Función para enviar un correo de confirmación de reserva
 async function enviarCorreoConfirmacion(email, nombreApellidoTutor, tallerFecha, tallerTitulo) {
+    const fechaFormateada = new Date(tallerFecha).toLocaleDateString('es-AR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+    });
+    const fechaConNegrita = `<strong>${fechaFormateada}</strong>`;
     const mailOptions = {
         from: '"EducarLab" conectarlab@elechaco.edu.ar', // Cambia por tu correo
         to: email,
         subject: `Confirmación de Reserva para ${tallerTitulo}`,
         text: `¡Hola ${nombreApellidoTutor}!
         ¡Qué alegría saber que está interesado en visitar el Centro de Innovación Educ.ar Lab Chaco! Nos encanta que nos elija para vivir esta experiencia.
-        Este mensaje es para confirmar que su turno ha sido asignado con éxito. ¡Ya estamos esperándolo en la fecha y el día acordados!
+        Este mensaje es para confirmar que su turno ha sido asignado con éxito. ¡Ya estamos esperándolo en la fecha del ${fechaConNegrita}!
         Por favor, recuerden que, si necesitan cancelar o reprogramar la visita, pueden contactarnos a través de:
         Correo: educarlab@elechaco.edu.ar
         Celular: 3625175481

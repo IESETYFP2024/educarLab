@@ -349,34 +349,39 @@ const EducacionForm = () => {
               </Grid>
             )}
             
-            <Grid item xs={12} alignItems="center" sx={{mt:1}}>
-              <FormControlLabel 
-                control={<Checkbox required />} 
-                label="Acepto los términos y condiciones de uso" 
-              />
-              <Button 
-              variant='contained'
-              required
-              style={{backgroundColor: '#8D5CF6'}}
-              onClick={()=>{
-                window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing'); //enlace vinculado al documento del drive conectarLAB
-              }}
-              >
-              Ver Condiciones 
-              </Button>
-            </Grid>
-            <Grid container alignItems="center" sx={{mt:1}}>
-            <Typography style={{marginLeft:25}}>
-            Formulario de autorización de Imagen
-            </Typography>
-            <Button
-              onClick={handleDescarga}
-              variant="contained"
-              style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
-            >
-              Descargar formulario <DownloadIcon />
-          </Button>
-            </Grid>
+            <Grid item xs={12} alignItems="center" sx={{mt:3}}>
+        <FormControlLabel 
+          control={<Checkbox required />} 
+          label="Acepto los términos y condiciones de uso" 
+        />
+        <Button 
+          variant='contained'
+          required
+          style={{backgroundColor: '#8D5CF6'}}
+          onClick={()=>{
+            window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
+          }}
+        >
+          Ver condiciones 
+        </Button>
+      </Grid>
+
+      <Grid container alignItems="center" sx={{mt:1}}>
+        <Typography sx={{ ml: { xs: 2, sm: 3 } }}>
+          Formulario de autorización de Imagen
+        </Typography>
+        <Button
+          onClick={handleDescarga}
+          variant="contained"
+          sx={{ 
+            backgroundColor: '#8D5CF6',
+            ml: { xs: 2, sm: 3 },
+            mt: { xs: 1, sm: 0 }
+          }}
+        >
+          Descargar formulario <DownloadIcon />
+        </Button>
+    </Grid>
 
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>

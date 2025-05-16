@@ -126,6 +126,7 @@ function App() {
                   displayEmpty
                   onChange={handleComunidadChange}
                   renderValue={(selected) => selected || "TALLERES ABIERTOS "}
+                  MenuProps={{ disableScrollLock: true }}
                   style={{
                     backgroundColor: '#ac86fd',
                     color: 'white',

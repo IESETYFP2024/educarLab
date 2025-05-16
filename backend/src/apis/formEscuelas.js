@@ -25,13 +25,29 @@ export async function PostTurno(request, response) {
 
 // Función para agregar una reserva y enviar correo
 async function enviarCorreoConfirmacion(email, nombreEscuela, fechaVisita, horario, nombreDirector) {
+    const fechaFormateada = new Date(fechaVisita).toLocaleDateString('es-AR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+    });
+
+    let horarioFormateado = '';
+
+    if (horario === 'Mañana 1' || horario === 'Mañana 2') {
+        horarioFormateado = 'de 09:00 a 11:00';
+    } else if (horario === 'Tarde 1' || horario === 'Tarde 2') {
+        horarioFormateado = 'de 14:00 a 16:00';
+    } else {
+        horarioFormateado = horario; // por si llega otro valor inesperado
+    }
     const mailOptions = {
         from: '"EducarLab" conectarlab@elechaco.edu.ar', // Cambia por tu correo
         to: email,
         subject: `Confirmación de Reserva para ${nombreEscuela}`,
-        text: `¡Hola profe ${nombreDirector}!
+        text: `¡Hola profe!
         ¡Qué alegría saber que están interesados en visitar el Centro de Innovación Educ.ar Lab Chaco! Nos encanta que nos elijan para vivir esta experiencia junto a sus estudiantes.
-        Este mensaje es para confirmar que su turno ha sido asignado con éxito. ¡Ya estamos esperándolos en la fecha ${fechaVisita} en el horario ${horario}!
+        Este mensaje es para confirmar que su turno ha sido asignado con éxito. ¡Ya estamos esperándolos en la fecha ${fechaFormateada}  en el horario ${horarioFormateado}!
         Por favor, recuerden que, si necesitan cancelar o reprogramar la visita, pueden contactarnos a través de:
         Correo: educarlab@elechaco.edu.ar
         Celular: 3625175481

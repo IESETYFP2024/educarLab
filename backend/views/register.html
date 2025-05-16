@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="/css/styless_login.css">
+    <link rel="stylesheet" href="/crud/css/styless_login.css">
 </head>
 <body>
     <div class="logo-container">
-        <a href="./public/ConectarLab.html"></a>
-        <img src="images/1080x1920 EDUCARLAB Chaco_Gris.png" alt="Logo" class="logo">
+        <a href="/"></a>
+        <img src="/crud/images/1080x1920 EDUCARLAB Chaco_Gris.png" alt="Logo" class="logo">
     </div>
 
     <div class="container">
@@ -40,7 +40,7 @@
     
         async function registerUser(email, password) {
             try {
-                const response = await fetch('http://localhost:3002/users/createAdmin', { 
+                const response = await fetch('http://localhost:3000 /users/createAdmin', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

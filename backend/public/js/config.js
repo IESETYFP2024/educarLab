@@ -1,4 +1,4 @@
-const IP = "http://localhost:3002"
+const IP = "http://localhost:3000 "
 
 
 export default IP

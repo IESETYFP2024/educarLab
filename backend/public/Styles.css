@@ -7,8 +7,10 @@
 /*Barra de Navegacion*/
 /*BARRA DE NAVEGACION*/
 
-body{
-    overflow-x: hidden;
+html, body {
+  overflow-x: hidden;
+  font-family: 'Kubic', sans-serif;     /* evita scroll horizontal */
+  width: 100%;            /* fuerza el ancho completo */
 }
 #barradenavegacion {
     background-color: #252D4F;
@@ -497,6 +499,7 @@ img, svg {
     bottom: 0;
 }
 */
+
 .carousel-lab .card:hover {
     transform: translateY(-5px);
 }
@@ -520,7 +523,8 @@ img, svg {
     padding: 0;
     height: 100%;
     z-index: 1;
-    background-color: transparent;
+    filter: brightness(0) saturate(100%) invert(0%); /* deja negro */
+  background-color: transparent; /* si no quieres fondo */
 }
 
 /* Media Queries para pantallas medianas (hasta 760px) */
@@ -528,7 +532,7 @@ img, svg {
     .lab-section {
         margin: 15px; 
     }
-
+    
     .carousel-lab .card {
         padding: 10px;
         margin-top: 3%; 
@@ -554,35 +558,34 @@ img, svg {
         display: flex; 
         align-items: center; /* Alineación central */
         justify-content: center;
+        
     }
 }
 
 /* Media Queries para pantallas pequeñas (hasta 480px) */
 @media (max-width: 480px) {
-    .lab-section {
-        margin: 10px; 
-    }
+  .containerlab {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+  }
 
-    .carousel-lab .card {
-        padding: 8px; 
-        margin-top: 5%;
-        width: 100%; 
-    }
+  .carousel-lab .row {
+    justify-content: center !important;
+  }
 
-    .carousel-lab .card-img-top {
-        width: 100%; 
-        max-width: 100%; 
-        height: auto; 
-    }
+  .carousel-lab .col-md-4 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 
-    .carousel-lab .carousel-control-prev,
-    .carousel-lab .carousel-control-next {
-        display: flex; 
-        align-items: center;
-        justify-content: center;
-    }
-
+  .carousel-lab .card-img-top {
+    width: 90%;
+    height: auto;
+  }
 }
+
 
 
 
@@ -598,7 +601,6 @@ img, svg {
 .carousel-lab .carousel-control-next-icon {
     border-radius: 50%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
     display: flex; 
     justify-content: center; 
@@ -715,7 +717,7 @@ width: 40px;
 
 .comentario-mariano .button{
     border:none;
-    font-size: 16px;
+    font-size: 6px;
     color:#fff;
     padding: 8px 16px;
     border-radius: 6px;
@@ -735,10 +737,12 @@ width: 40px;
 
 .comentario-mariano .swiper-button-next{
     right: 0;
+    color: #04080C;
 }
 
 .comentario-mariano .swiper-button-prev{
     left: 0;
+    color: #04080C;
 }
 
 .comentario-mariano .swiper-pagination-bullet{

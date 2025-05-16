@@ -4,12 +4,15 @@ import DownloadIcon from '@mui/icons-material/Download';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
 import IP from '../config'
 
 // Componente principal del formulario de comunidad
 const ComunidadForm = ({ talleres }) => {
   // Estado para el índice del taller actual en la lista
   const [index, setIndex] = useState(0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMensaje, setSnackbarMensaje] = useState('');
   const [descargaWord, setDescargaWord] = useState(false)
   const [cuposDisponibles, setCuposDisponibles ]= useState(null)
   // Obtener el taller actual en base al índice
@@ -115,17 +118,21 @@ const ComunidadForm = ({ talleres }) => {
   // Cambia al taller anterior en la lista
   const handlePrevious = () => {
     setIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : talleres.length - 1));
+    setSnackbarMensaje(`Taller ${tallerActual.titulo} seleccionado`);
+    setSnackbarOpen(true);
   };
 
   // Cambia al siguiente taller en la lista
   const handleNext = () => {
     setIndex((prevIndex) => (prevIndex < talleres.length - 1 ? prevIndex + 1 : 0));
+    setSnackbarMensaje(`Taller ${tallerActual.titulo } seleccionado`);
+    setSnackbarOpen(true);
   };
 
 
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, px: { xs: 2, sm: 4 }, pb: { xs: 6, sm: 4 } }}>
       {/* Encabezado y contenido del taller actual */}
       <Box sx={{ mb: 4, textAlign: 'center' }}>
         <Typography 
@@ -259,34 +266,40 @@ const ComunidadForm = ({ talleres }) => {
           />
         </Grid>
       </Grid>
-      <Grid item xs={12} alignItems="center" sx={{mt:3}}>
-              <FormControlLabel 
-                control={<Checkbox required />} 
-                label="Acepto los términos y condiciones de uso" 
-              />
-              <Button 
-              variant='contained'
-              required
-              style={{backgroundColor: '#8D5CF6'}}
-              onClick={()=>{
-                window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
-              }}
-              >
-              Ver condiciones 
-              </Button>
-            </Grid>
-            <Grid container alignItems="center" sx={{mt:1}}>
-            <Typography style={{marginLeft:25}}>
-            Formulario de autorización de Imagen
-            </Typography>
-            <Button
-              onClick={handleDescarga}
-              variant="contained"
-              style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
-            >
-              Descargar formulario <DownloadIcon />
-          </Button>
-            </Grid>
+     <Grid item xs={12} alignItems="center" sx={{mt:3}}>
+        <FormControlLabel 
+          control={<Checkbox required />} 
+          label="Acepto los términos y condiciones de uso" 
+        />
+        <Button 
+          variant='contained'
+          required
+          style={{backgroundColor: '#8D5CF6'}}
+          onClick={()=>{
+            window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
+          }}
+        >
+          Ver condiciones 
+        </Button>
+      </Grid>
+
+      <Grid container alignItems="center" sx={{mt:1}}>
+        <Typography sx={{ ml: { xs: 0, sm: 3 } }}>
+          Formulario de autorización de Imagen
+        </Typography>
+        <Button
+          onClick={handleDescarga}
+          variant="contained"
+          sx={{ 
+            backgroundColor: '#8D5CF6',
+            ml: { xs: 0, sm: 3 },
+            mt: { xs: 1, sm: 0 }
+          }}
+        >
+          Descargar formulario <DownloadIcon />
+        </Button>
+    </Grid>
+
       
       {/* Botones de navegación y envío del formulario */}
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3, gap: 2 }}>
@@ -299,7 +312,7 @@ const ComunidadForm = ({ talleres }) => {
         {/* Botón para cancelar y resetear el formulario */}
         <Button 
           variant="contained" 
-          style={{backgroundColor: '#E7214E'}} 
+          style={{backgroundColor: '#E7214E' }} 
           onClick={() => {
             setFormData({
               nombreApellido: '',
@@ -320,8 +333,7 @@ const ComunidadForm = ({ talleres }) => {
           variant="contained" 
           color="primary" 
           type="submit" 
-          sx={{ minWidth: '120px' }}
-          style={{backgroundColor: '#8D5CF6'}}
+          style={{backgroundColor: '#7038C3'}}
         >
           Enviar
         </Button>
@@ -331,6 +343,12 @@ const ComunidadForm = ({ talleres }) => {
             <ArrowForwardIosIcon /> {/* Botón para ir al siguiente taller */}
           </IconButton>
         )}
+        <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        message={snackbarMensaje}
+      />
       </Box>
     </Box>
   );

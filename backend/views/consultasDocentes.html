@@ -176,7 +176,7 @@
     // Función para cargar los datos de inscripciones
     async function loadAllAlumnos() {
         try {
-            const response = await fetch('http://localhost:3002/inscripciones_docente');
+            const response = await fetch('http://localhost:3000 /inscripciones_docente');
             if (!response.ok) {
                 throw new Error('');
             }
@@ -265,7 +265,7 @@
     // Función para enviar solicitud de cancelación de inscripción
     async function cancelarInscripcion(id) {
         try {
-            const response = await fetch(`http://localhost:3002/cancelar_inscripcion/${id}`, {
+            const response = await fetch(`http://localhost:3000 /cancelar_inscripcion/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' }
             });

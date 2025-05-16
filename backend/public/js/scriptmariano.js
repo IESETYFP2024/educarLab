@@ -35,7 +35,7 @@ var swiper = new Swiper(".slide-content", {
 
 async function fetchCommentsForSwiper() {
   try {
-      const response = await fetch('http://localhost:3002/comentarios');  // Cambia la URL al puerto del backend
+      const response = await fetch('/comentarios');  // Cambia la URL al puerto del backend
       
       if (!response.ok) {
           throw new Error('Error en la respuesta del servidor');
@@ -61,7 +61,6 @@ async function fetchCommentsForSwiper() {
           commentContainer.appendChild(commentSlide);
       });
 
-      // Reinitialize Swiper after dynamically adding content
       swiper.update(); // Re-inicializar el Swiper para los nuevos comentarios
 
   } catch (error) {

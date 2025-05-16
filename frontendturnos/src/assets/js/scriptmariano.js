@@ -35,7 +35,7 @@ var swiper = new Swiper(".slide-content", {
 
 async function fetchCommentsForSwiper() {
   try {
-      const response = await fetch('http://localhost:3000/comentarios');  // Cambia la URL al puerto del backend
+      const response = await fetch('http://localhost:3000 /comentarios');  // Cambia la URL al puerto del backend
       
       if (!response.ok) {
           throw new Error('Error en la respuesta del servidor');

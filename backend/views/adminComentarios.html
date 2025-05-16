@@ -152,14 +152,21 @@
 <!-- Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-<script>
+<script >
 
 // URL de la API en tu backend
 const apiUrl = '/comentarios';
 
-// Función para obtener el token del localStorage
+// Función para obtener el token de las cookies
 function obtenerToken() {
-    return localStorage.getItem('authToken');
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [nombre, valor] = cookie.trim().split('=');
+        if (nombre === 'token') {
+            return valor;
+        }
+    }
+    return null;
 }
 
 // Función para obtener y mostrar todos los comentarios

@@ -1,7 +1,7 @@
 // //Script de carrusel principal/Inicio. Hecho por Paniagua Pablo, Niss Evelin y Marcos Pescarolo
 // document.addEventListener('DOMContentLoaded', () => {
 //     // Fetch datos de comunidad (alumnos)
-//     fetch('http://localhost:3000/api/alumnos')
+//     fetch('http://localhost:3000 /api/alumnos')
 //         .then(response => {
 //             if (!response.ok) {
 //                 throw new Error('Error en la red al obtener comunidad');
@@ -10,7 +10,7 @@
 //         })
 //         .then(async dataComunidad => {
 //             // Fetch datos de docente
-//             const response = await fetch('http://localhost:3000/api/docentes');
+//             const response = await fetch('http://localhost:3000 /api/docentes');
 //             if (!response.ok) {
 //                 throw new Error('Error en la red al obtener docente');
 //             }
@@ -125,7 +125,7 @@ let currentSlide = 0;
  */
 function loadTalleres() {
     // Fetch datos de comunidad (alumnos)
-    fetch('http://localhost:3000/api/alumnos')
+    fetch('http://localhost:3000 /api/alumnos')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error en la red al obtener comunidad');
@@ -134,7 +134,7 @@ function loadTalleres() {
         })
         .then(async dataComunidad => {
             // Fetch datos de docente
-            const response = await fetch('http://localhost:3000/api/docentes');
+            const response = await fetch('http://localhost:3000 /api/docentes');
             if (!response.ok) {
                 throw new Error('Error en la red al obtener docente');
             }

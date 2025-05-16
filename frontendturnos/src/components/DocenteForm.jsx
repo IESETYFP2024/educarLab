@@ -4,12 +4,16 @@ import DownloadIcon from '@mui/icons-material/Download';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
 import IP from '../config'
+
 
 // Componente principal que muestra un formulario para registrar un docente
 const DocenteForm = ({ talleres }) => {
   // Estado para manejar el índice del taller actualmente mostrado
   const [index, setIndex] = useState(0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMensaje, setSnackbarMensaje] = useState('');
   const [descargaWord, setDescargaWord] = useState(false)
   const [cuposDisponibles, setCuposDisponibles ]= useState(null)
   // Obtiene el taller actual a partir del índice
@@ -107,14 +111,18 @@ const DocenteForm = ({ talleres }) => {
     }
   };
 
-  // Función para mostrar el taller anterior
+  // Cambia al taller anterior en la lista
   const handlePrevious = () => {
     setIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : talleres.length - 1));
+    setSnackbarMensaje(`Taller ${tallerActual.titulo} seleccionado`);
+    setSnackbarOpen(true);
   };
 
-  // Función para mostrar el siguiente taller
+  // Cambia al siguiente taller en la lista
   const handleNext = () => {
     setIndex((prevIndex) => (prevIndex < talleres.length - 1 ? prevIndex + 1 : 0));
+    setSnackbarMensaje(`Taller ${tallerActual.titulo } seleccionado`);
+    setSnackbarOpen(true);
   };
 
 
@@ -245,33 +253,38 @@ const DocenteForm = ({ talleres }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} alignItems="center" sx={{mt:3}}>
-          <FormControlLabel 
-              control={<Checkbox required />} 
-              label="Acepto los términos y condiciones de uso" 
-          />
-          <Button 
-            variant='contained'
-            required
-            style={{backgroundColor: '#8D5CF6'}}
-            onClick={()=>{
-              window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
-            }}
-            >
-            Ver condiciones 
-          </Button>
-      </Grid>
-      <Grid container alignItems="center" sx={{mt:1}}>
-        <Typography style={{marginLeft:25}}>
-          Formulario de autorización de Imagen
-        </Typography>
-          <Button
-            onClick={handleDescarga}
-            variant="contained"
-            style={{ backgroundColor: '#8D5CF6', marginLeft:25 }}
-          >
-            Descargar formulario <DownloadIcon />
-        </Button>
-      </Grid>
+      <FormControlLabel 
+        control={<Checkbox required />} 
+        label="Acepto los términos y condiciones de uso" 
+      />
+      <Button 
+        variant='contained'
+        required
+        style={{backgroundColor: '#8D5CF6'}}
+        onClick={()=>{
+          window.open('https://drive.google.com/file/d/1TpdETINayzZrMJ1xZMxiNUpqMTG22wYE/view?usp=sharing');
+        }}
+      >
+        Ver condiciones 
+      </Button>
+    </Grid>
+
+    <Grid container alignItems="center" sx={{mt:1}}>
+      <Typography sx={{ ml: { xs: 0, sm: 3 } }}>
+        Formulario de autorización de Imagen
+      </Typography>
+      <Button
+        onClick={handleDescarga}
+        variant="contained"
+        sx={{ 
+          backgroundColor: '#8D5CF6',
+          ml: { xs: 0, sm: 3 },
+          mt: { xs: 1, sm: 0 }
+        }}
+      >
+        Descargar formulario <DownloadIcon />
+      </Button>
+    </Grid>
 
       {/* Botones para navegar entre talleres, cancelar y enviar */}
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3, gap: 2 }}>
@@ -285,7 +298,7 @@ const DocenteForm = ({ talleres }) => {
           // Restablece los datos del formulario al hacer clic en "Cancelar"
           setFormData({
             nombreApellido: '',
-            escuela: '',
+            profesion: '',
             dni: '',
             email: '',
             telefono: '',
@@ -300,7 +313,7 @@ const DocenteForm = ({ talleres }) => {
           color="primary" 
           type="submit" 
           sx={{ minWidth: '120px' }}
-          style={{backgroundColor: '#8D5CF6'}}
+          style={{backgroundColor: '#7038C3'}}
         >
           Enviar
         </Button>
@@ -310,6 +323,12 @@ const DocenteForm = ({ talleres }) => {
             <ArrowForwardIosIcon />
           </IconButton>
         )}
+        <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000}
+                onClose={() => setSnackbarOpen(false)}
+                message={snackbarMensaje}
+              />
       </Box>
     </Box>
   );

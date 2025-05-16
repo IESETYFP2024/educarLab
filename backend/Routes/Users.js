@@ -6,11 +6,13 @@ import bcrypt from 'bcrypt';    // Librería para encriptar contraseñas
 import nodemailer from 'nodemailer'; // Librería para enviar correos electrónicos
 import database from '../src/db/conexion.js';  // Módulo para la conexión y consultas a la base de datos
 import transporter from '../src/nodemailerConfig.js'; // Importamos Nodemailer
+import dotenv from 'dotenv';
 
 const users = express.Router();  // Router de Express para definir rutas
 
 // Middleware para habilitar CORS en todas las rutas de 'users'
 users.use(cors());
+dotenv.config()
 
 // Endpoint POST '/createAdmin': Maneja la creación de nuevos administradores
 users.post('/createAdmin', async function(req, res) {
@@ -46,10 +48,10 @@ users.post('/login', async function(req, res) {
               const payload = { id: rows[0].id, email: rows[0].email };
               const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h'}); // Token expira en 24 horas
               res.cookie('token', token, {
-                httpOnly: true,
-                secure: false, 
+                httpOnly: false,
+                secure: process.env.NODE_ENV === 'production', 
                 sameSite: 'Lax',
-                maxAge: 3600000 // 1 hora
+                maxAge: 86400 // 24 horas
               });
               res.status(200).json({ error: 0, token }); // Respuesta exitosa con token
 
@@ -86,7 +88,7 @@ users.post('/sendResetPasswordEmail', async function(req, res) {
         from: 'conectarlab@elechaco.edu.ar',
         to: email,
         subject: 'Restablecimiento de contraseña',
-        text: `Haga clic en el siguiente enlace para restablecer su contraseña: http://localhost:3002/resetPassword.html?token=${token}`
+        text: `Haga clic en el siguiente enlace para restablecer su contraseña: http://localhost:3000 /resetPassword.html?token=${token}`
       };
 
       // Enviar el correo electrónico
