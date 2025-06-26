@@ -89,7 +89,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Escuelas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/consultasEscuelas">Escuelas</a></li>
                     <li class="nav-item"><a class="nav-link" href="/consultasComunidad">Comunidad</a></li>
                     <li class="nav-item"><a class="nav-link" href="/consultasDocentes">Docentes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/adminComentarios">Comentarios</a></li>
@@ -176,7 +176,7 @@
     // Función para cargar los datos de inscripciones
     async function loadAllAlumnos() {
         try {
-            const response = await fetch('http://localhost:3000 /inscripciones_docente');
+            const response = await fetch('http://localhost:3000/inscripciones_docente');
             if (!response.ok) {
                 throw new Error('');
             }

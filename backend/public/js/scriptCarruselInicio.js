@@ -10,7 +10,7 @@
 //         })
 //         .then(async dataComunidad => {
 //             // Fetch datos de docente
-//             const response = await fetch('https://educarlab.gar.com.ar/api/docentes');
+//             const response = await fetch('http://localhost:3000/api/docentes');
 //             if (!response.ok) {
 //                 throw new Error('Error en la red al obtener docente');
 //             }
@@ -190,7 +190,7 @@ function loadTalleres() {
                             <h4>${entrada.titulo}</h4>
                             <p><strong>Fecha :</strong> ${fechaFormateada}</p>
                             <p>${entrada.descripcion}</p>
-                            <button onclick="location.href='/frontend/dist/turnos.html'">Reservar Turnos</button>
+                            <button onclick="location.href='./turnos/index.html'">Reservar Turnos</button>
                         </div>
                         <div class="image-section">
                             <img src="${imagenSrc}" alt="${entrada.titulo}">

@@ -88,7 +88,7 @@ users.post('/sendResetPasswordEmail', async function(req, res) {
         from: 'conectarlab@elechaco.edu.ar',
         to: email,
         subject: 'Restablecimiento de contraseña',
-        text: `Haga clic en el siguiente enlace para restablecer su contraseña: http://localhost:3000 /resetPassword.html?token=${token}`
+        text: `Haga clic en el siguiente enlace para restablecer su contraseña: http://localhost:3000/resetPassword.html?token=${token}`
       };
 
       // Enviar el correo electrónico

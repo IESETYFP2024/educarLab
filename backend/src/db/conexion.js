@@ -5,7 +5,7 @@ let DB = null
 try {
    DB = await mysql.createConnection({
       host: 'localhost',
-      user: '',
+      user: 'root',
       password: '',
       database: '',
     });

@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import EducacionForm from './components/EducacionForm';
 import ComunidadForm from './components/ComunidadForm';
 import DocenteForm from './components/DocenteForm';
-import '/public/estilo.css';
+import '/public/Styles.css';
 import './App.css';
 import axios from 'axios';
 
@@ -205,7 +205,7 @@ function App() {
               <div className="col-md-12">
                 <div className="logo_container">
                   <img src="../img/logos/Logo Chaco.png" alt="Logo Chaco" />
-                  <img src="../img/logos/Logo educar.png" alt="Logo Educar" />
+                  <img src="../img/logos/logoeducarfooter2.png" alt="Logo Educar" />
                   <img src="../img/logos/Logo Fontana.png" alt="Logo Fontana" />
                   <img src="../img/logos/Logo Ministerio.png" alt="Logo Ministerio" />
                 </div>

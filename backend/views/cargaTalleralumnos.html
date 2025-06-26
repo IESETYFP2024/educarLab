@@ -89,7 +89,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Escuelas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/consultasEscuelas">Escuelas</a></li>
                     <li class="nav-item"><a class="nav-link" href="/consultasComunidad">Comunidad</a></li>
                     <li class="nav-item"><a class="nav-link" href="/consultasDocentes">Docentes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/adminComentarios">Comentarios</a></li>
@@ -104,7 +104,7 @@
 <!-- Main Content -->
 <div class="container">
     <h1>Editor de talleres</h1>
-    <form action="http://localhost:3000 /alumnos/confirmacion" method="POST" class="mb-4">
+    <form action="http://localhost:3000/alumnos/confirmacion" method="POST" class="mb-4">
         <div class="mb-3">
             <label for="titulo" class="form-label">Título:</label>
             <input type="text" id="titulo" name="titulo" class="form-control" required>
@@ -153,7 +153,7 @@
 
     async function loadAllTalleresAlumnos() {
         try {
-            const response = await fetch('http://localhost:3000 /api/alumnos');
+            const response = await fetch('http://localhost:3000/api/alumnos');
             if (!response.ok) {
                 throw new Error('No se encontraron resultados');
             }
@@ -185,7 +185,7 @@
     async function cancelTallerAlumnos(id) {
         if (confirm('¿Estás seguro de que deseas eliminar este taller?')) {
             try {
-                const response = await fetch(`http://localhost:3000 /alumnos/delete/${id}`, { method: 'DELETE' });
+                const response = await fetch(`http://localhost:3000/alumnos/delete/${id}`, { method: 'DELETE' });
                 if (response.ok) {
                     alert('Taller eliminado');
                     loadAllTalleresAlumnos();

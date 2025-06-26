@@ -1,72 +1,93 @@
-// Configuración de Swiper para mostrar los comentarios en un slider
-var swiper = new Swiper(".slide-content", {
-  slidesPerView: 3,
-  spaceBetween: 10,
-  loop: true,
-  autoplay: {
-    delay: 2000,
-    disableOnInteraction: false,
-  },
-  centeredSlides: true,  // Centra los slides
-  grabCursor: true, // Permite el cursor de "agarrar"
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    dynamicBullets: true,
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-
-  on: {
-    slideChangeTransitionEnd: function () {
-      if (swiper.isEnd) {
-        swiper.slideTo(0); // Vuelve al primer slide al llegar al final
-      }
-    }
-  }
-});
-
-
-
-
-
-
 async function fetchCommentsForSwiper() {
-  try {
-      const response = await fetch('/comentarios');  // Cambia la URL al puerto del backend
-      
-      if (!response.ok) {
-          throw new Error('Error en la respuesta del servidor');
-      }
+    try {
+        const response = await fetch('/comentarios');
+        if (!response.ok) {
+            throw new Error('Error al obtener los comentarios');
+        }
+        const comentarios = await response.json();
+        const carouselInner = document.querySelector('#comentariosCarousel .carousel-inner');
+        const prevButton = document.querySelector('.comentario-mariano .carousel-control-prev');
+        const nextButton = document.querySelector('.comentario-mariano .carousel-control-next');
+        const isMobile = window.innerWidth <= 768;
 
-      const comentarios = await response.json();
-      const commentContainer = document.querySelector('.card-wrapper');
-      commentContainer.innerHTML = ''; // Limpiar contenido previo
+        // Función para controlar visibilidad de flechas
+        const toggleArrows = (show) => {
+            if (prevButton && nextButton) {
+                prevButton.style.display = show ? 'flex' : 'none';
+                nextButton.style.display = show ? 'flex' : 'none';
+            }
+        };
 
-      comentarios.forEach((comment, index) => {
-          const commentSlide = document.createElement('div');
-          commentSlide.classList.add('card', 'swiper-slide');
-          
-          commentSlide.innerHTML = `
-              <div class="image-content">
-                  <span class="overlay" id="overlay-${index + 1}"></span>
-              </div>
-              <div class="card-content">
-                  <h4 class="name">${comment.name}</h4>
-                  <p class="description">${comment.description}</p>
-              </div>
-          `;
-          commentContainer.appendChild(commentSlide);
-      });
+        if (isMobile) {
+            toggleArrows(comentarios.length > 1);
+            // En móvil: mostrar un comentario por slide
+            comentarios.forEach((comment, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+                
+                slideDiv.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h4 class="name">${comment.name || 'Anónimo'}</h4>
+                                    <p class="description">${comment.description || 'Sin comentario'}</p>
+                                    <div class="rating">
+                                        <img src="/img/estrellas.png" alt="calificación" class="rating-stars">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                carouselInner.appendChild(slideDiv);
+            });
+        } else {
+            // Mostrar flechas solo si hay más de 3 comentarios en desktop
+            toggleArrows(comentarios.length > 3);
+            // En desktop: mantener el comportamiento original de 3 por slide
+            for(let i = 0; i < comentarios.length; i += 3) {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = `carousel-item ${i === 0 ? 'active' : ''}`;
+                
+                const row = document.createElement('div');
+                row.className = 'row';
 
-      swiper.update(); // Re-inicializar el Swiper para los nuevos comentarios
+                // Agregar 3 comentarios por slide
+                for(let j = i; j < i + 3 && j < comentarios.length; j++) {
+                    const comment = comentarios[j];
+                    row.innerHTML += `
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h4 class="name">${comment.name || 'Anónimo'}</h4>
+                                    <p class="description">${comment.description || 'Sin comentario'}</p>
+                                    <div class="rating">
+                                        <img src="/img/estrellas.png" alt="calificación" class="rating-stars">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
 
-  } catch (error) {
-      console.error('Error al cargar los comentarios en el slider:', error);
-  }
+                slideDiv.appendChild(row);
+                carouselInner.appendChild(slideDiv);
+            }
+        }
+
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
 }
 
-// Llamar a la función cuando se cargue la página
+// Manejar cambios de tamaño de ventana
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+        location.reload();
+    }
+});
+
+// Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', fetchCommentsForSwiper);

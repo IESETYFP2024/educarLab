@@ -210,20 +210,29 @@ img, svg {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background: none; /* sin fondo */
     border: none;
-    color: white;
-    padding: 10px;
+    color: #000000; /* color oscuro, podés ajustar */
+    font-size: 30px; /* tamaño moderno y claro */
+    padding: 5px;
     cursor: pointer;
     border-radius: 50%;
+    transition: transform 0.2s ease, color 0.3s ease;
+    z-index: 10;
 }
 
+.carousel-inicio .carousel-button:hover {
+    transform: translateY(-50%) scale(1.1);
+    color: #000; /* un poco más oscuro al pasar el mouse */
+}
+
+/* Ubicación más cerca del carrusel */
 .prev-inicio {
-    left: 10px;
+    left: 30px;
 }
 
 .next-inicio {
-    right: 10px;
+    right: 30px;
 }
 
 /* Media Queries para hacerlo responsive */
@@ -251,6 +260,17 @@ img, svg {
         background-position: center center;
         background-size: cover;
     }
+    .carousel-inicio .carousel-button {
+    font-size: 24px;
+  }
+
+  .prev-inicio {
+    left: 15px;
+  }
+
+  .next-inicio {
+    right: 15px;
+  }
 }
 
 @media (max-width: 460px) {
@@ -528,61 +548,18 @@ img, svg {
 }
 
 /* Media Queries para pantallas medianas (hasta 760px) */
-@media (max-width: 760px) {
-    .lab-section {
-        margin: 15px; 
-    }
-    
-    .carousel-lab .card {
-        padding: 10px;
-        margin-top: 3%; 
-        width: 95%; 
-    }
-
-    .carousel-lab .card-img-top {
-        width: 100%; 
-        max-width: 100%; 
-        height: auto; 
-    }
-
-    .carousel-lab .carousel-control-prev {
-        left: 15px; 
-    }
-
-    .carousel-lab .carousel-control-next {
-        right: 15px;
-    }
-
-    .carousel-lab .carousel-control-prev,
-    .carousel-lab .carousel-control-next {
-        display: flex; 
-        align-items: center; /* Alineación central */
-        justify-content: center;
-        
-    }
+@media (max-width: 767px) {
+  .carousel-lab .carousel-control-prev,
+  .carousel-lab .carousel-control-next {
+    display: none;
+  }
 }
 
 /* Media Queries para pantallas pequeñas (hasta 480px) */
 @media (max-width: 480px) {
-  .containerlab {
-    margin: 0 auto;
-    text-align: center;
-    width: 100%;
-  }
-
-  .carousel-lab .row {
-    justify-content: center !important;
-  }
-
-  .carousel-lab .col-md-4 {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .carousel-lab .card-img-top {
-    width: 90%;
-    height: auto;
+  .carousel-lab .carousel-control-prev,
+  .carousel-lab .carousel-control-next {
+    display: none;
   }
 }
 
@@ -628,134 +605,190 @@ color: #38393E ;
 
 
 /*ESTILOS DE COMENTARIOS*/
-#comentarios{
-    padding: 20px 10px;
+#comentarios {
+    margin: 0;
+    padding: 40px 0;
+    font-family: 'Kubic', sans-serif;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #f5f5f5;
 }
 
-.comentario-mariano {
-    min-height: 100vh;
+.container-comentarios {
+    position: relative;
+    max-width: 85%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.comentario-mariano .card {
+    border-radius: 15px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    height: 200px;
+    margin: 5px 15px;
+    box-shadow: 0 10px 20px rgba(37, 45, 79, 0.07);
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.comentario-mariano .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #252D4F, #C7A1EB);
+}
+
+.comentario-mariano .card-content {
+    padding: 20px;
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #C2D1D9;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+}
+
+.comentario-mariano .name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #252D4F;
+    margin-bottom: 8px;
+    font-family: 'Kubic', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.comentario-mariano .description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    flex-grow: 1;
+    margin: 0;
     font-family: 'Kubic', sans-serif;
 }
 
-.comentario-mariano .slide-container{
-    max-width: 100%;
-    width: 100%;
-    padding: 20px 0;
-}
-
-.titulocomentario{
-    margin-bottom: 5%;
-}
-
-.comentario-mariano .slide-content{
-    margin: 0 40px;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.comentario-mariano .card{
-    border-radius: 10px;
-    background-color: #fff;
-    min-height: 150px; /* Establece una altura mínima para todas las tarjetas */
-    height:auto; /* Las tarjetas crecerán según el contenido */
-}
-
-
-.comentario-mariano .image-content,
-.comentario-mariano .card-content{
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 10px 14px;
-}
-
-.comentario-mariano .image-content{
-    position: relative;
-    row-gap: 5px;
-    padding: 20px 0;
-}
-
-.comentario-mariano .overlay{
-    position:absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    border-radius: 25px 25px 90px 90px;
-}
-
-.comentario-mariano .overlay::before,
-.comentario-mariano .overlay::after{
-content: '';
-position: absolute;
-right: 0;
-bottom: -40px;
-height: 40px;
-width: 40px;
-}
-
-.comentario-mariano .overlay::after{
-    border-radius: 0 0 0 0;
-    background-color: #FFF;
-}
-
-.comentario-mariano .name{
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-}
-
-.comentario-mariano .description{
-    font-size: 14px;
-    color: #707070;
+.comentario-mariano .rating {
+    margin-top: auto;
     text-align: center;
+    padding-top: 10px;
 }
 
-.comentario-mariano .button{
-    border:none;
-    font-size: 6px;
-    color:#fff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    margin: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.comentario-mariano .rating-stars {
+    width: 80px;
+    height: auto;
+    opacity: 0.9;
+    margin-bottom: 5px;
 }
 
-.comentario-mariano .swiper-navBtn{
-    color: #fff;
-    transition: color 0.3s ease;
+.comentario-mariano .name {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #252D4F;
 }
 
-.comentario-mariano .swiper-navBtn:hover{
-    color: #E7214E;
+.comentario-mariano .description {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #666;
+    margin-bottom: 15px;
 }
 
-.comentario-mariano .swiper-button-next{
-    right: 0;
-    color: #04080C;
+.comentario-mariano .carousel-control-prev,
+.comentario-mariano .carousel-control-next {
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
 }
 
-.comentario-mariano .swiper-button-prev{
-    left: 0;
-    color: #04080C;
+.comentario-mariano .carousel-control-prev-icon,
+.comentario-mariano .carousel-control-next-icon {
+    filter: brightness(0);
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
 }
 
-.comentario-mariano .swiper-pagination-bullet{
-    background-color: #FFFFFF;
-    opacity: 1;
+.comentario-mariano .carousel-control-prev {
+    left: -50px;
 }
 
-.comentario-mariano .swiper-pagination-bullet-active{
-    background-color:#424B5A;
-    ;
+.comentario-mariano .carousel-control-next {
+    right: -50px; /* Ajustado para que coincida con la distancia de la flecha izquierda */
 }
 
+@media (max-width: 768px) {
+    #comentarios {
+        padding: 20px 0;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+    
+    .comentario-mariano .carousel-item .col-md-4 {
+        display: none;
+    }
+    
+    .comentario-mariano .carousel-item .col-md-4:first-child {
+        display: block;
+        width: 100%;
+    }
+    
+    .comentario-mariano .card {
+        margin: 10px auto;
+        width: 90%;
+    }
+    
+    .comentario-mariano .carousel-control-prev {
+        left: -25px;
+    }
+    
+    .comentario-mariano .carousel-control-next {
+        right: -25px;
+    }
+}
 
+/* Media query específico para iPad Pro y Surface Pro 7 */
+@media (min-width: 769px) and (max-width: 1366px) {
+    .container-comentarios {
+        max-width: 95%;
+    }
+
+    .comentario-mariano .carousel-item .col-md-4 {
+        display: inline-block;
+        width: 33.333%;
+    }
+
+    .comentario-mariano .card {
+        margin: 10px 8px;
+        height: 220px;
+    }
+
+    .comentario-mariano .card-content {
+        padding: 15px;
+    }
+
+    .comentario-mariano .carousel-control-prev {
+        left: -30px;
+    }
+    
+    .comentario-mariano .carousel-control-next {
+        right: -30px;
+    }
+}
 
 
 /*ESTILOS DEL FOOTER*/
@@ -885,8 +918,4 @@ width: 40px;
         margin-top: 20px;
            
 }
-
-
-
-
 
